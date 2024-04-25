@@ -1,0 +1,62 @@
+[gd_scene load_steps=5 format=3 uid="uid://b0a2elljnji67"]
+
+[ext_resource type="Script" path="res://scripts/TileEditor/TileEditor.cs" id="1_hqa2e"]
+[ext_resource type="Texture2D" uid="uid://bldfm2w8opfm7" path="res://textures/search_icon.png" id="2_sgb3j"]
+[ext_resource type="Script" path="res://scripts/DraggableControl.cs" id="2_v2tgy"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lrcpw"]
+bg_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+
+[node name="TileEditor" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hqa2e")
+
+[node name="TileToolbox" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 16.0
+offset_top = 48.0
+offset_right = 251.0
+offset_bottom = 393.0
+mouse_filter = 2
+
+[node name="DragPanel" type="Panel" parent="TileToolbox"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+offset_bottom = 10.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lrcpw")
+script = ExtResource("2_v2tgy")
+
+[node name="SearchLine" type="LineEdit" parent="TileToolbox"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 10.0
+offset_bottom = 31.0
+grow_horizontal = 2
+placeholder_text = "Search for tiles"
+context_menu_enabled = false
+right_icon = ExtResource("2_sgb3j")
+
+[node name="TilesScroll" type="ScrollContainer" parent="TileToolbox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TilesTree" type="Tree" parent="TileToolbox/TilesScroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal_enabled = false

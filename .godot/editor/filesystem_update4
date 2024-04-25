@@ -1,0 +1,16 @@
+res://scenes/petrichor.tscn
+res://resources/default_theme.tres
+res://shaders/prop.gdshader
+res://shaders/level.gdshader
+res://shaders/tile.gdshader
+res://shaders/geo_layer.gdshader
+res://scenes/tile_editor.tscn
+res://scenes/geo_editor.tscn
+res://scripts/Editor.cs
+res://scripts/Tooltip.cs
+res://scripts/GeoEditor/GeoToolButton.cs
+res://scripts/Petrichor.cs
+res://scripts/GeoEditor/GeoLayer.cs
+res://scripts/TileEditor/TileEditor.cs
+res://scripts/DraggableControl.cs
+res://scripts/GeoEditor/GeometryEditor.cs

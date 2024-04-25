@@ -1,0 +1,100 @@
+[gd_scene load_steps=4 format=3 uid="uid://d4fk1yy7pijgi"]
+
+[ext_resource type="Script" path="res://scripts/Petrichor.cs" id="1_1sfrw"]
+[ext_resource type="PackedScene" uid="uid://c4hakpmjxmoeu" path="res://scenes/geo_editor.tscn" id="1_h7bvq"]
+[ext_resource type="PackedScene" uid="uid://b0a2elljnji67" path="res://scenes/tile_editor.tscn" id="3_cye6d"]
+
+[node name="Petrichor" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1sfrw")
+
+[node name="GeoEditor" parent="." instance=ExtResource("1_h7bvq")]
+layout_mode = 1
+
+[node name="TileEditor" parent="." instance=ExtResource("3_cye6d")]
+visible = false
+layout_mode = 1
+
+[node name="ControlsLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -238.0
+offset_top = -93.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Left click: Use / set primary tool
+Right click: Use / set secondary tool
+W: Increase layer
+S: Decrease layer
+R: Center Camera
+Ctrl + V: Paste selection"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="PerformanceLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -29.0
+offset_right = 118.0
+offset_bottom = -16.0
+grow_vertical = 0
+text = "RAM: 0.00MB"
+vertical_alignment = 2
+
+[node name="ZoomLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -118.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 29.0
+grow_horizontal = 0
+text = "Zoom: 100%"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="MenuBar" type="MenuBar" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 21.0
+grow_horizontal = 2
+theme_override_constants/h_separation = 0
+
+[node name="File" type="PopupMenu" parent="MenuBar"]
+unique_name_in_owner = true
+
+[node name="Edit" type="PopupMenu" parent="MenuBar"]
+unique_name_in_owner = true
+
+[node name="View" type="PopupMenu" parent="MenuBar"]
+unique_name_in_owner = true
+size = Vector2i(160, 100)
+item_count = 2
+item_0/text = "Reset Camera Position"
+item_0/id = 0
+item_1/text = "Reset Window Positions"
+item_1/id = 1
+
+[node name="Help" type="PopupMenu" parent="MenuBar"]
+unique_name_in_owner = true

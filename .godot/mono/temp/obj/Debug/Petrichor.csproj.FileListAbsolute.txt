@@ -1,0 +1,17 @@
+D:\Files 2\Folders\Godot Projects\Petrichor\.godot\mono\temp\bin\Debug\Petrichor.deps.json
+D:\Files 2\Folders\Godot Projects\Petrichor\.godot\mono\temp\bin\Debug\Petrichor.runtimeconfig.json
+D:\Files 2\Folders\Godot Projects\Petrichor\.godot\mono\temp\bin\Debug\Petrichor.dll
+D:\Files 2\Folders\Godot Projects\Petrichor\.godot\mono\temp\bin\Debug\Petrichor.pdb
+D:\Files 2\Folders\Godot Projects\Petrichor\.godot\mono\temp\bin\Debug\GodotSharp.dll
+D:\Files 2\Folders\Godot Projects\Petrichor\.godot\mono\temp\bin\Debug\GodotSharpEditor.dll
+D:\Files 2\Folders\Godot Projects\Petrichor\.godot\mono\temp\obj\Debug\Petrichor.csproj.AssemblyReference.cache
+D:\Files 2\Folders\Godot Projects\Petrichor\.godot\mono\temp\obj\Debug\Petrichor.GeneratedMSBuildEditorConfig.editorconfig
+D:\Files 2\Folders\Godot Projects\Petrichor\.godot\mono\temp\obj\Debug\Petrichor.AssemblyInfoInputs.cache
+D:\Files 2\Folders\Godot Projects\Petrichor\.godot\mono\temp\obj\Debug\Petrichor.AssemblyInfo.cs
+D:\Files 2\Folders\Godot Projects\Petrichor\.godot\mono\temp\obj\Debug\Petrichor.csproj.CoreCompileInputs.cache
+D:\Files 2\Folders\Godot Projects\Petrichor\.godot\mono\temp\obj\Debug\Petrichor.csproj.CopyComplete
+D:\Files 2\Folders\Godot Projects\Petrichor\.godot\mono\temp\obj\Debug\Petrichor.dll
+D:\Files 2\Folders\Godot Projects\Petrichor\.godot\mono\temp\obj\Debug\refint\Petrichor.dll
+D:\Files 2\Folders\Godot Projects\Petrichor\.godot\mono\temp\obj\Debug\Petrichor.pdb
+D:\Files 2\Folders\Godot Projects\Petrichor\.godot\mono\temp\obj\Debug\Petrichor.genruntimeconfig.cache
+D:\Files 2\Folders\Godot Projects\Petrichor\.godot\mono\temp\obj\Debug\ref\Petrichor.dll

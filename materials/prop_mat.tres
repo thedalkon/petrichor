@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dm0lpxtrviwb2"]
+
+[ext_resource type="Shader" path="res://shaders/prop.gdshader" id="1_rn6qj"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_rn6qj")
+shader_parameter/current_layer = 0
+shader_parameter/color_key = null

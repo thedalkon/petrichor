@@ -1,0 +1,297 @@
+[gd_scene load_steps=31 format=3 uid="uid://c4hakpmjxmoeu"]
+
+[ext_resource type="Script" path="res://scripts/GeoEditor/GeometryEditor.cs" id="1_iuboh"]
+[ext_resource type="Texture2D" uid="uid://d4et5tsmtgiev" path="res://textures/SolidButton.png" id="2_3f60b"]
+[ext_resource type="Script" path="res://scripts/GeoEditor/GeoToolButton.cs" id="3_os820"]
+[ext_resource type="Texture2D" uid="uid://qgina7ddnro4" path="res://textures/AirButton.png" id="3_sgog6"]
+[ext_resource type="Texture2D" uid="uid://ccjpg57n046jm" path="res://textures/SlopeButton.png" id="4_365xt"]
+[ext_resource type="Texture2D" uid="uid://cgr5o8t68nbfv" path="res://textures/VPoleButton.png" id="6_680qt"]
+[ext_resource type="Texture2D" uid="uid://ctq2r8k7udgai" path="res://textures/RectButton.png" id="7_6sohf"]
+[ext_resource type="Texture2D" uid="uid://1bryj6523svw" path="res://textures/HPoleButton.png" id="7_cixli"]
+[ext_resource type="FontFile" uid="uid://008yktgvcppd" path="res://resources/CozetteVector.ttf" id="7_wy4pa"]
+[ext_resource type="Texture2D" uid="uid://14y08mhj3sqc" path="res://textures/PlatformButton.png" id="8_gmmrm"]
+[ext_resource type="Texture2D" uid="uid://cr2wowu2bkkjp" path="res://textures/AirRectButton.png" id="9_rcefc"]
+[ext_resource type="Texture2D" uid="uid://clebsewsqxwg6" path="res://textures/EraseAllButton.png" id="10_dqhu0"]
+[ext_resource type="Texture2D" uid="uid://c2vpd22hbua71" path="res://textures/ShortcutEntranceButton.png" id="11_gdrtt"]
+[ext_resource type="Texture2D" uid="uid://cw8tcfxyhxmlf" path="res://textures/ShortcutPathButton.png" id="12_dt0sj"]
+[ext_resource type="Texture2D" uid="uid://dvxcb6mjj3yt4" path="res://textures/SelectionButton.png" id="12_jvagp"]
+[ext_resource type="Texture2D" uid="uid://bcdnrjd17tbpe" path="res://textures/RoomEntranceButton.png" id="13_gdsok"]
+[ext_resource type="Texture2D" uid="uid://b0rlmtsjrmaky" path="res://textures/LizardDenButton.png" id="14_mxice"]
+[ext_resource type="Texture2D" uid="uid://buw1pomxtkl4k" path="res://textures/SpearButton.png" id="15_57xx8"]
+[ext_resource type="Texture2D" uid="uid://crbbgncr4ai1b" path="res://textures/RockButton.png" id="16_hqn4v"]
+[ext_resource type="Texture2D" uid="uid://b1atudthn45sk" path="res://textures/CrackedTerrainButton.png" id="17_tvl1k"]
+[ext_resource type="Texture2D" uid="uid://upix6uod0dmo" path="res://textures/ForbidBatButton.png" id="18_k4h8o"]
+[ext_resource type="Texture2D" uid="uid://34qkmw2een58" path="res://textures/BatHiveButton.png" id="19_geyib"]
+[ext_resource type="Texture2D" uid="uid://dfkjjhyu5cw10" path="res://textures/GarbageHoleButton.png" id="20_uuhyk"]
+[ext_resource type="Texture2D" uid="uid://d2gd0lkwxhapu" path="res://textures/waterfallButton.png" id="21_0xrtm"]
+[ext_resource type="Texture2D" uid="uid://3d3bbjghofvo" path="res://textures/CreatureShortcutButton.png" id="22_0prgm"]
+[ext_resource type="Texture2D" uid="uid://djm3jevek5otv" path="res://textures/WormgrassButton.png" id="23_rk6t3"]
+[ext_resource type="Texture2D" uid="uid://br2b4bs3qf3sj" path="res://textures/ScavengerDenButton.png" id="24_0jidt"]
+[ext_resource type="Script" path="res://scripts/DraggableControl.cs" id="28_hywr2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_flyv7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y6x4v"]
+bg_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+
+[node name="GeoEditor" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_iuboh")
+
+[node name="ToolPanel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 48.0
+offset_right = 96.0
+offset_bottom = 432.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_flyv7")
+
+[node name="ToolGrid" type="GridContainer" parent="ToolPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 2
+
+[node name="SolidButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+button_mask = 3
+texture_normal = ExtResource("2_3f60b")
+script = ExtResource("3_os820")
+
+[node name="AirButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+button_mask = 3
+texture_normal = ExtResource("3_sgog6")
+script = ExtResource("3_os820")
+ToolNumber = 1
+
+[node name="SlopeButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+button_mask = 3
+texture_normal = ExtResource("4_365xt")
+script = ExtResource("3_os820")
+ToolNumber = 2
+
+[node name="VPoleButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+button_mask = 3
+texture_normal = ExtResource("6_680qt")
+script = ExtResource("3_os820")
+ToolNumber = 3
+
+[node name="HPoleButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+button_mask = 3
+texture_normal = ExtResource("7_cixli")
+script = ExtResource("3_os820")
+ToolNumber = 4
+
+[node name="PlatformButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+button_mask = 3
+texture_normal = ExtResource("8_gmmrm")
+script = ExtResource("3_os820")
+ToolNumber = 22
+
+[node name="FillRectButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+button_mask = 3
+texture_normal = ExtResource("7_6sohf")
+script = ExtResource("3_os820")
+ToolNumber = 5
+
+[node name="EraseRectButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+button_mask = 3
+texture_normal = ExtResource("9_rcefc")
+script = ExtResource("3_os820")
+ToolNumber = 6
+
+[node name="EraseAllButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+button_mask = 3
+texture_normal = ExtResource("10_dqhu0")
+script = ExtResource("3_os820")
+ToolNumber = 7
+
+[node name="SelectionButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+button_mask = 3
+texture_normal = ExtResource("12_jvagp")
+script = ExtResource("3_os820")
+ToolNumber = 23
+
+[node name="ShortcutEntButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+button_mask = 3
+texture_normal = ExtResource("11_gdrtt")
+script = ExtResource("3_os820")
+ToolNumber = 8
+
+[node name="ShortcutPathButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+button_mask = 3
+texture_normal = ExtResource("12_dt0sj")
+script = ExtResource("3_os820")
+ToolNumber = 9
+
+[node name="RoomEntButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+button_mask = 3
+texture_normal = ExtResource("13_gdsok")
+script = ExtResource("3_os820")
+ToolNumber = 10
+
+[node name="LizardDenButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+button_mask = 3
+texture_normal = ExtResource("14_mxice")
+script = ExtResource("3_os820")
+ToolNumber = 11
+
+[node name="SpearButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+button_mask = 3
+texture_normal = ExtResource("15_57xx8")
+script = ExtResource("3_os820")
+ToolNumber = 12
+
+[node name="RockButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+button_mask = 3
+texture_normal = ExtResource("16_hqn4v")
+script = ExtResource("3_os820")
+ToolNumber = 13
+
+[node name="CrackedTerrButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+button_mask = 3
+texture_normal = ExtResource("17_tvl1k")
+script = ExtResource("3_os820")
+ToolNumber = 14
+
+[node name="ForbidBatButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+button_mask = 3
+texture_normal = ExtResource("18_k4h8o")
+script = ExtResource("3_os820")
+ToolNumber = 15
+
+[node name="BatHiveButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+button_mask = 3
+texture_normal = ExtResource("19_geyib")
+script = ExtResource("3_os820")
+ToolNumber = 16
+
+[node name="GarbageHoleButton2" type="TextureButton" parent="ToolPanel/ToolGrid"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+button_mask = 3
+texture_normal = ExtResource("20_uuhyk")
+script = ExtResource("3_os820")
+ToolNumber = 17
+
+[node name="WaterfallButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+button_mask = 3
+texture_normal = ExtResource("21_0xrtm")
+script = ExtResource("3_os820")
+ToolNumber = 18
+
+[node name="CreatureShortcutButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+button_mask = 3
+texture_normal = ExtResource("22_0prgm")
+script = ExtResource("3_os820")
+ToolNumber = 19
+
+[node name="WormgrassButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+button_mask = 3
+texture_normal = ExtResource("23_rk6t3")
+script = ExtResource("3_os820")
+ToolNumber = 20
+
+[node name="ScavengerDenButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+button_mask = 3
+texture_normal = ExtResource("24_0jidt")
+script = ExtResource("3_os820")
+ToolNumber = 21
+
+[node name="ToolLabel" type="Label" parent="ToolPanel"]
+unique_name_in_owner = true
+self_modulate = Color(1, 0.5, 0.5, 1)
+layout_mode = 0
+offset_left = 80.0
+offset_right = 120.0
+offset_bottom = 23.0
+theme_override_fonts/font = ExtResource("7_wy4pa")
+theme_override_font_sizes/font_size = 13
+text = "Primary Tool: Solid"
+
+[node name="SecondaryToolLabel" type="Label" parent="ToolPanel"]
+unique_name_in_owner = true
+self_modulate = Color(0.5, 0.541667, 1, 1)
+layout_mode = 0
+offset_left = 80.0
+offset_top = 16.0
+offset_right = 146.0
+offset_bottom = 39.0
+theme_override_fonts/font = ExtResource("7_wy4pa")
+theme_override_font_sizes/font_size = 13
+text = "Secondary Tool: Air"
+
+[node name="LayerLabel" type="Label" parent="ToolPanel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 80.0
+offset_top = 32.0
+offset_right = 146.0
+offset_bottom = 55.0
+theme_override_fonts/font = ExtResource("7_wy4pa")
+theme_override_font_sizes/font_size = 13
+text = "Layer: 1"
+
+[node name="DragPanel" type="Panel" parent="ToolPanel"]
+layout_mode = 0
+offset_top = -10.0
+offset_right = 64.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_y6x4v")
+script = ExtResource("28_hywr2")
