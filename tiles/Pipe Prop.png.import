@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bpgeb5rm3y6la"
-path="res://.godot/imported/Pipe Prop.png-04496d8d60be53360a3e58250b08f676.ctex"
+uid="uid://cvkamse3gyx62"
+path="res://.godot/imported/Pipe prop.png-1a746e1141b48f18e1735ee55ce18c9c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tiles/Pipe Prop.png"
-dest_files=["res://.godot/imported/Pipe Prop.png-04496d8d60be53360a3e58250b08f676.ctex"]
+source_file="res://tiles/Pipe prop.png"
+dest_files=["res://.godot/imported/Pipe prop.png-1a746e1141b48f18e1735ee55ce18c9c.ctex"]
 
 [params]
 

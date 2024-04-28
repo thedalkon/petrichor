@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://42rn2fjl2h1l"
-path="res://.godot/imported/DSCoils S.png-bb5bcb0fc604a6bf18f61fe09bb7e490.ctex"
+uid="uid://bdyuppd7h8p7"
+path="res://.godot/imported/DScoils S.png-7fc10f03889487f0fcc56db9da8d7950.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tiles/DSCoils S.png"
-dest_files=["res://.godot/imported/DSCoils S.png-bb5bcb0fc604a6bf18f61fe09bb7e490.ctex"]
+source_file="res://tiles/DScoils S.png"
+dest_files=["res://.godot/imported/DScoils S.png-7fc10f03889487f0fcc56db9da8d7950.ctex"]
 
 [params]
 

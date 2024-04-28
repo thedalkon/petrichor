@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://t0fh3beohj32"
-path="res://.godot/imported/disc pipe 2.png-00488a3f3beaa9c54f808e93e308653b.ctex"
+uid="uid://bgu55sfd441p2"
+path="res://.godot/imported/Disc Pipe 2.png-b1d997bbc170b112913c0b6da29f129f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tiles/disc pipe 2.png"
-dest_files=["res://.godot/imported/disc pipe 2.png-00488a3f3beaa9c54f808e93e308653b.ctex"]
+source_file="res://tiles/Disc Pipe 2.png"
+dest_files=["res://.godot/imported/Disc Pipe 2.png-b1d997bbc170b112913c0b6da29f129f.ctex"]
 
 [params]
 

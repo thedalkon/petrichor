@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b0a2elljnji67"]
+[gd_scene load_steps=7 format=3 uid="uid://b0a2elljnji67"]
 
 [ext_resource type="Script" path="res://scripts/TileEditor/TileEditor.cs" id="1_hqa2e"]
 [ext_resource type="Texture2D" uid="uid://bldfm2w8opfm7" path="res://textures/search_icon.png" id="2_sgb3j"]
 [ext_resource type="Script" path="res://scripts/DraggableControl.cs" id="2_v2tgy"]
+[ext_resource type="Material" uid="uid://g2ge3oiocam0" path="res://materials/tile_render_mat.tres" id="4_jo8hv"]
+[ext_resource type="Texture2D" uid="uid://b7777myaeuixv" path="res://tiles/3DBrick.png" id="5_g11b6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lrcpw"]
 bg_color = Color(0.0705882, 0.0705882, 0.0705882, 1)
@@ -53,10 +55,27 @@ anchor_bottom = 1.0
 offset_top = 31.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = false
 
 [node name="TilesTree" type="Tree" parent="TileToolbox/TilesScroll"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+allow_search = false
 scroll_horizontal_enabled = false
+
+[node name="TileLabel" type="RichTextLabel" parent="TileToolbox"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = -16.0
+offset_right = 235.0
+offset_bottom = -3.0
+bbcode_enabled = true
+text = "Current Tile:"
+
+[node name="3dBrick" type="Sprite2D" parent="."]
+material = ExtResource("4_jo8hv")
+position = Vector2(446, 351)
+texture = ExtResource("5_g11b6")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://sxvpqea3f3rp"
-path="res://.godot/imported/round exhaust closed.png-78740ff60c253cb3373308f5eba6a7b2.ctex"
+uid="uid://cngu3v7b4mt07"
+path="res://.godot/imported/Round Exhaust Closed.png-6cc696973c0b945d028d1fbd0be8976e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tiles/round exhaust closed.png"
-dest_files=["res://.godot/imported/round exhaust closed.png-78740ff60c253cb3373308f5eba6a7b2.ctex"]
+source_file="res://tiles/Round Exhaust Closed.png"
+dest_files=["res://.godot/imported/Round Exhaust Closed.png-6cc696973c0b945d028d1fbd0be8976e.ctex"]
 
 [params]
 

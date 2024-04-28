@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using Godot;
+using Petrichor.scripts.Lingo;
+
 // ReSharper disable InconsistentNaming
 
 namespace Petrichor.scripts;
@@ -24,6 +27,26 @@ public static class Utils
         }
 
         return new string(chars);
+    }
+
+    public static string TrimUnquotedWhitespace(this string str)
+    {
+        List<char> chars = new();
+        int quoteNum = 0;
+        foreach (char c in str)
+        {
+            if (c == '"')
+            {
+                quoteNum++;
+                chars.Add(c);
+            }
+            else if (c == ' ' && quoteNum % 2 != 0)
+                chars.Add(c);
+            else if (c != ' ')
+                chars.Add(c);
+        }
+
+        return new string(chars.ToArray());
     }
 
     public static string[] SplitUnnested(this string str, char c)
@@ -68,8 +91,28 @@ public static class Utils
         return ret;
     }
     
+    public static T[] ToArray<T>(this LingoLinearList list)
+    {
+        if (list == null)
+            return null;
+        
+        T[] array = new T[list.Values.Length];
+        for (int i = 0; i < list.Values.Length; i++)
+        {
+            if (list.Values[i] is not T)
+                throw new ArrayTypeMismatchException("Unable to cast 'LingoLinearList' to array of type '" + typeof(T) + "'.");
+            array[i] = (T)list.Values[i];
+        }
+        return array;
+    }
+    
     public static T[] Slice<T>(this T[] source, int start, int end)
     {
+        if (end == start)
+        {
+            return new T[] { source[start] };
+        }
+        
         if (end < 0)
         {
             end = source.Length + end;
@@ -88,7 +131,30 @@ public static class Utils
     {
         return new Color(r * 0.00392156862f, g * 0.00392156862f, b * 0.00392156862f);
     }
+    
+    // This thing is so fucking slow, not using it
+    public static bool FileExistsCaseSensitive(string filename)
+    {
+        string name = Path.GetDirectoryName(filename);
 
+        return name != null 
+               && Array.Exists(Directory.GetFiles(name), s => s == Path.GetFullPath(filename));
+    }
+
+    public static void Fill3D<T>(this T[,,] array, T fillValue)
+    {
+        for (int i = 0; i < array.GetLength(0); i++)
+        {
+            for (int j = 0; j < array.GetLength(1); j++)
+            {
+                for (int k = 0; k < array.GetLength(2); k++)
+                {
+                    array[i, j, k] = fillValue;
+                }
+            }
+        }
+    }
+    
     public static class FlagsHelper
     {
         public static bool IsSet<T>(T flags, T flag) where T : struct

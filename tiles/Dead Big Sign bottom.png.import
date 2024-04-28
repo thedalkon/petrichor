@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cpxppswefeave"
-path="res://.godot/imported/Dead Big Sign bottom.png-ec124593a6826eed59a4699a2a5160fa.ctex"
+uid="uid://f24vo2xu5nph"
+path="res://.godot/imported/Dead Big Sign Bottom.png-703a627fe1c4c155c82df7b4f0d764d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tiles/Dead Big Sign bottom.png"
-dest_files=["res://.godot/imported/Dead Big Sign bottom.png-ec124593a6826eed59a4699a2a5160fa.ctex"]
+source_file="res://tiles/Dead Big Sign Bottom.png"
+dest_files=["res://.godot/imported/Dead Big Sign Bottom.png-703a627fe1c4c155c82df7b4f0d764d7.ctex"]
 
 [params]
 

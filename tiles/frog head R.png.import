@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwpwiafug73ve"
-path="res://.godot/imported/frog head R.png-08eebc2d1d27b4ac67bc4f5e040310ee.ctex"
+uid="uid://bd1rbwxgx8vna"
+path="res://.godot/imported/Frog Head R.png-f9c5de6397cabbf58b25bfd9ee0f42eb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tiles/frog head R.png"
-dest_files=["res://.godot/imported/frog head R.png-08eebc2d1d27b4ac67bc4f5e040310ee.ctex"]
+source_file="res://tiles/Frog Head R.png"
+dest_files=["res://.godot/imported/Frog Head R.png-f9c5de6397cabbf58b25bfd9ee0f42eb.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cy4jna1fqgduh"
-path="res://.godot/imported/corrugated iron.png-474677d3deddbd5fe6671882d45d0469.ctex"
+uid="uid://b4ddtoka7j2pm"
+path="res://.godot/imported/Corrugated Iron.png-00f0d186493c3349e44bb4a3c6c5afee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tiles/corrugated iron.png"
-dest_files=["res://.godot/imported/corrugated iron.png-474677d3deddbd5fe6671882d45d0469.ctex"]
+source_file="res://tiles/Corrugated Iron.png"
+dest_files=["res://.godot/imported/Corrugated Iron.png-00f0d186493c3349e44bb4a3c6c5afee.ctex"]
 
 [params]
 

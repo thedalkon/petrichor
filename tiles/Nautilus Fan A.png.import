@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c312vhexlcutg"
-path="res://.godot/imported/Nautilus Fan A.png-403633d6e2f00572ce929eb202ec65ec.ctex"
+uid="uid://dl3bqodetq4n5"
+path="res://.godot/imported/nautilus fan a.png-35a0a66b045428de93486f4b9d12d5cf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tiles/Nautilus Fan A.png"
-dest_files=["res://.godot/imported/Nautilus Fan A.png-403633d6e2f00572ce929eb202ec65ec.ctex"]
+source_file="res://tiles/nautilus fan a.png"
+dest_files=["res://.godot/imported/nautilus fan a.png-35a0a66b045428de93486f4b9d12d5cf.ctex"]
 
 [params]
 

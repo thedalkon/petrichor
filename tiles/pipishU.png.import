@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c3eebp0d1g1qw"
-path="res://.godot/imported/pipishU.png-5f9d4ef91ad81eaabc340de48f68b2c2.ctex"
+uid="uid://bbbufg3gr375n"
+path="res://.godot/imported/PipishU.png-7b8fe48469e9e1e50c6c3cf86c5a96c2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tiles/pipishU.png"
-dest_files=["res://.godot/imported/pipishU.png-5f9d4ef91ad81eaabc340de48f68b2c2.ctex"]
+source_file="res://tiles/PipishU.png"
+dest_files=["res://.godot/imported/PipishU.png-7b8fe48469e9e1e50c6c3cf86c5a96c2.ctex"]
 
 [params]
 

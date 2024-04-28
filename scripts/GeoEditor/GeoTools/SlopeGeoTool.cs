@@ -15,7 +15,7 @@ public class SlopeGeoTool : GeoTool
     
     public override void ApplyTool(Vector2I cellPos, int layer)
     {
-        if (GeometryEditor.Data[0, cellPos.X, cellPos.Y].Type != (int)CellTypes.Solid)
+        if (GeometryEditor.Data[layer, cellPos.X, cellPos.Y].Type != (int)CellTypes.Solid)
             return;
 
         foreach (Vector2I dir in _slopeDirections.Keys)

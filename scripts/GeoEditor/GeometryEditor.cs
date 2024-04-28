@@ -15,10 +15,6 @@ public partial class GeometryEditor : Editor
 
 	public static Cell[,,] Data;
 	
-	private static Vector2 _mousePos = Vector2.Zero;
-	private static Vector2 _tiledMousePos = Vector2.Zero;
-	private static Vector2 _relativeMousePos = Vector2.Zero;
-	
 	public static event EventHandler ChangedTool;
 	public static event EventHandler TerrainRedrawn;
 
@@ -106,7 +102,6 @@ public partial class GeometryEditor : Editor
 			AddChild(layer);
 		}
 		AddChild(GeoTooltip);
-		
 	}
 
 	public override void _Process(double delta)
@@ -143,19 +138,11 @@ public partial class GeometryEditor : Editor
 
 	public override void _Draw()
 	{
-		_mousePos = GetViewport().GetMousePosition();
-		_tiledMousePos = ((_mousePos - new Vector2(ZoomFactor, ZoomFactor) - Petrichor.CameraPos.PosMod(ZoomFactor)) / 
-		                  ZoomFactor).Ceil() * ZoomFactor + Petrichor.CameraPos.PosMod(ZoomFactor);
-		_relativeMousePos = _mousePos - Petrichor.CameraPos;
-		
 		DrawRect(Petrichor.LevelRect.Grow(3), Colors.White, false, 2);
 		
 		// Cursor tooltips
 		if (IsInLevelRect())
 		{
-			GeoTooltip.MousePos = _mousePos;
-			GeoTooltip.TiledMousePos = _tiledMousePos;
-			GeoTooltip.RelativeMousePos = _relativeMousePos;
 			GeoTooltip.QueueRedraw();
 		}
 		
@@ -167,7 +154,6 @@ public partial class GeometryEditor : Editor
 		Data[layer, x, y].Type = (int)cellType;
 	}
 	
-	// ReSharper disable once MemberCanBePrivate.Global
 	public static void SetCell(int layer, Vector2I pos, CellTypes cellType)
 	{
 		Data[layer, pos.X, pos.Y].Type = (int)cellType;
@@ -208,7 +194,7 @@ public partial class GeometryEditor : Editor
 		string clipboard = DisplayServer.ClipboardGet();
 		if (!clipboard.StartsWith("PTCHR")) return;
 		
-		Vector2I mousePos = (Vector2I)(_relativeMousePos / ZoomFactor).Floor();
+		Vector2I mousePos = (Vector2I)(Petrichor.RelativeMousePos / ZoomFactor).Floor();
 		if (!IsInLevelRect(mousePos)) return;
 		
 		string[] entries = clipboard.Split(';', StringSplitOptions.RemoveEmptyEntries);
@@ -241,19 +227,19 @@ public partial class GeometryEditor : Editor
 		RedrawTerrain();
 	}
 
-	private static bool IsInLevelRect(out Vector2I cellPos)
+	public static bool IsInLevelRect(out Vector2I cellPos)
 	{
-		cellPos = (Vector2I)(_relativeMousePos / ZoomFactor).Floor();
+		cellPos = (Vector2I)(Petrichor.RelativeMousePos / ZoomFactor).Floor();
 		return !(cellPos.X < 0 || cellPos.X >= LevelSize.X || cellPos.Y < 0 || cellPos.Y >= LevelSize.Y);
 	}
 	
-	private static bool IsInLevelRect()
+	public static bool IsInLevelRect()
 	{
-		Vector2I cellPos = (Vector2I)(_relativeMousePos / ZoomFactor).Floor();
+		Vector2I cellPos = (Vector2I)(Petrichor.RelativeMousePos / ZoomFactor).Floor();
 		return !(cellPos.X < 0 || cellPos.X >= LevelSize.X || cellPos.Y < 0 || cellPos.Y >= LevelSize.Y);
 	}
 	
-	private static bool IsInLevelRect(Vector2I cellPos)
+	public static bool IsInLevelRect(Vector2I cellPos)
 	{
 		return !(cellPos.X < 0 || cellPos.X >= LevelSize.X || cellPos.Y < 0 || cellPos.Y >= LevelSize.Y);
 	}
@@ -276,7 +262,6 @@ public partial class GeometryEditor : Editor
 
 public struct Cell
 {
-	// ReSharper disable once MemberCanBePrivate.Global
 	public bool Equals(Cell other)
 	{
 		return Type == other.Type && Stackables == other.Stackables;

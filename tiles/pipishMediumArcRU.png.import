@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0oakko1tsgxt"
-path="res://.godot/imported/pipishMediumArcRU.png-bc58de77db6f69a8dd9a9f3715b64b9b.ctex"
+uid="uid://drj3jmmnjd2tr"
+path="res://.godot/imported/PipishMediumArcRU.png-44079d978cd0dc67cccbcda1aab1ee1a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tiles/pipishMediumArcRU.png"
-dest_files=["res://.godot/imported/pipishMediumArcRU.png-bc58de77db6f69a8dd9a9f3715b64b9b.ctex"]
+source_file="res://tiles/PipishMediumArcRU.png"
+dest_files=["res://.godot/imported/PipishMediumArcRU.png-44079d978cd0dc67cccbcda1aab1ee1a.ctex"]
 
 [params]
 

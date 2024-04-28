@@ -13,12 +13,16 @@ public partial class Petrichor : Control
 
     public static Editor CurrentEditor;
     
-    public static List<GeoLayer> GeoLayerInstances = new();
+    public static List<GeoLayer> LayerInstances = new();
 
     // ReSharper disable once InconsistentNaming
     public static float ZoomFactor = 16.0f;
     public static Rect2 LevelRect;
     public static int CurrentLayer;
+    
+    public static Vector2 MousePos = Vector2.Zero;
+    public static Vector2 TiledMousePos = Vector2.Zero;
+    public static Vector2 RelativeMousePos = Vector2.Zero;
     
     private static Vector2 _cameraPos = Vector2.Zero;
     public static Vector2 CameraPos
@@ -27,7 +31,7 @@ public partial class Petrichor : Control
         set
         {
             _cameraPos = value;
-            foreach (GeoLayer layer in GeoLayerInstances)
+            foreach (GeoLayer layer in LayerInstances)
             {
                 layer.GlobalPosition = CameraPos;
             }
@@ -53,6 +57,11 @@ public partial class Petrichor : Control
 
     public override void _Process(double delta)
     {
+        MousePos = GetViewport().GetMousePosition();
+        TiledMousePos = ((MousePos - new Vector2(ZoomFactor, ZoomFactor) - CameraPos.PosMod(ZoomFactor)) / 
+                          ZoomFactor).Ceil() * ZoomFactor + CameraPos.PosMod(ZoomFactor);
+        RelativeMousePos = MousePos - CameraPos;
+        
         // Changing Editors
         foreach (string action in _editors.Keys)
         {
@@ -67,8 +76,8 @@ public partial class Petrichor : Control
         {
             CurrentLayer += 1;
             if (CurrentLayer >= 3) CurrentLayer = 0;
-            //GetNode<Label>("%LayerLabel").Text = "Layer: " + (CurrentLayer + 1);
-            foreach (var layer in GeoLayerInstances)
+            GetNode<Label>("%LayerLabel").Text = "Layer: " + (CurrentLayer + 1);
+            foreach (var layer in LayerInstances)
             {
                 layer.LayerChanged();
             }
@@ -77,7 +86,8 @@ public partial class Petrichor : Control
         {
             CurrentLayer -= 1;
             if (CurrentLayer < 0) CurrentLayer = 2;
-            foreach (var layer in GeoLayerInstances)
+            GetNode<Label>("%LayerLabel").Text = "Layer: " + (CurrentLayer + 1);
+            foreach (var layer in LayerInstances)
             {
                 layer.LayerChanged();
             }
@@ -89,8 +99,21 @@ public partial class Petrichor : Control
             CameraPos = GetViewport().GetVisibleRect().GetCenter() - (Vector2)GeometryEditor.LevelSize * ZoomFactor * 0.5f;
             GeometryEditor.RedrawTerrain();
             LevelRect = new Rect2(CameraPos, (Vector2)GeometryEditor.LevelSize * ZoomFactor);
+            GetNode<Label>("%ZoomLabel").Text = "Zoom: " + Math.Round(ZoomFactor / 16.0f * 100.0f, 3) + "%";
         }
+    }
 
+    public override void _Input(InputEvent @event)
+    {
+        if (Input.IsActionPressed("ui_drag") && @event is InputEventMouseMotion motionEvent)
+        {
+            CameraPos += motionEvent.Relative;
+            LevelRect = new Rect2(CameraPos, (Vector2)GeometryEditor.LevelSize * ZoomFactor);
+        }
+    }
+
+    public override void _UnhandledInput(InputEvent @event)
+    {
         if (Input.IsActionJustPressed("scroll_up"))
         {
             ZoomFactor = Mathf.Clamp(ZoomFactor + 1.0f, 0.0f, Mathf.Inf);
@@ -107,15 +130,6 @@ public partial class Petrichor : Control
         }
     }
 
-    public override void _Input(InputEvent @event)
-    {
-        if (Input.IsActionPressed("ui_drag") && @event is InputEventMouseMotion motionEvent)
-        {
-            CameraPos += motionEvent.Relative;
-            LevelRect = new Rect2(CameraPos, (Vector2)GeometryEditor.LevelSize * ZoomFactor);
-        }
-    }
-    
     private void SetEditor(string action)
     {
         foreach (Editor editor in _editors.Values)
@@ -134,6 +148,8 @@ public partial class Petrichor : Control
     private void UpdatePerformanceLabels()
     {
         float ramUsage = MathF.Round(OS.GetStaticMemoryUsage() * 0.000001f, 2);
-        GetNode<Label>("%PerformanceLabel").Text = "RAM: " + ramUsage + "MB";
+        GetNode<Label>("%PerformanceLabel").Text = 
+            "RAM: " + ramUsage + "MB\n" +
+            "FPS: " + Engine.GetFramesPerSecond();
     }
 }

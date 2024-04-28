@@ -6,9 +6,6 @@ namespace Petrichor.scripts;
 
 public partial class Tooltip : Control
 {
-    public Vector2 MousePos;
-    public Vector2 TiledMousePos;
-    public Vector2 RelativeMousePos;
     public bool OverrideTooltip;
     public Rect2 TooltipRect;
     public new string TooltipText;

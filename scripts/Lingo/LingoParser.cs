@@ -14,6 +14,7 @@ public static class LingoParser
     {
         List<string> fileList = File.ReadAllLines(path).ToList();
         fileList.RemoveAll(string.IsNullOrWhiteSpace);
+        fileList.RemoveAll(s => s.StartsWith("--"));
         string[] fileLines = fileList.ToArray();
         
         List<int> categoryLines = new List<int>();
@@ -28,22 +29,24 @@ public static class LingoParser
 
         for (int i = 0; i < categoryLines.Count; i++)
         {
-            int dstBetweenCat;
+            int subLines;
             if (i + 1 == categoryLines.Count)
-            {
-                dstBetweenCat = categoryLines.Count - 1 - i;
-            }
+                subLines = fileLines.Length - categoryLines[i] - 2;
             else
+                subLines = categoryLines[i + 1] - categoryLines[i] - 1;
+            
+            if (subLines < 1)
             {
-                dstBetweenCat = (categoryLines[i + 1] - 1) - (categoryLines[i] + 1);
-            }
-            if (dstBetweenCat <= 1)
-            {
-                Debug.WriteLine(Utils.WARNING_STR + "Category is empty, skipping");
+                LingoCategory emptyCat = LingoCategory.FromString(fileLines[categoryLines[i]], new string[]{});
+                Debug.WriteLine(Utils.WARNING_STR + "Category " + emptyCat.Name + " is empty, skipping.");
                 continue;
             }
+
+            var substrings = i + 1 == categoryLines.Count ? 
+                fileLines.Slice(categoryLines[i] + 1, fileLines.Length) 
+                : 
+                fileLines.Slice(categoryLines[i] + 1, categoryLines[i + 1] - 1);
             
-            string[] substrings = fileLines.Slice(categoryLines[i] + 1, categoryLines[i + 1]);
             categories[i] = LingoCategory.FromString(fileLines[categoryLines[i]], substrings);
         }
 
@@ -52,7 +55,7 @@ public static class LingoParser
     
     public static object ParseValue(string value)
     {
-        value = value.Replace(" ", "");
+        value = value.TrimUnquotedWhitespace();
         
         if (value[0] == '"') // String
         {
@@ -168,7 +171,7 @@ public class LingoLinearList
 
 public class LingoPropertyList
 {
-    public LingoProperty[] Properties;
+    public readonly LingoProperty[] Properties;
 
     private LingoPropertyList(LingoProperty[] properties)
     {

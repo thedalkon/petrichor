@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8wsv1mlm03qu"
-path="res://.godot/imported/feather box - W.png-e894d3a65e00a9c557c08f85794aa79e.ctex"
+uid="uid://cm1mqdvy80ijw"
+path="res://.godot/imported/Feather Box - W.png-61a2c6a16d65974d2af6ad634893182d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tiles/feather box - W.png"
-dest_files=["res://.godot/imported/feather box - W.png-e894d3a65e00a9c557c08f85794aa79e.ctex"]
+source_file="res://tiles/Feather Box - W.png"
+dest_files=["res://.godot/imported/Feather Box - W.png-61a2c6a16d65974d2af6ad634893182d.ctex"]
 
 [params]
 

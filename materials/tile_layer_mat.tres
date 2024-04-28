@@ -1,0 +1,15 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://b1gv2ao3vq0wt"]
+
+[ext_resource type="Shader" path="res://shaders/tile_layer.gdshader" id="1_ash7q"]
+
+[sub_resource type="Gradient" id="Gradient_agifn"]
+colors = PackedColorArray(0.199219, 0.102406, 0.0979453, 1, 0.0737491, 0.148438, 0.0814149, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0smlk"]
+gradient = SubResource("Gradient_agifn")
+
+[resource]
+shader = ExtResource("1_ash7q")
+shader_parameter/tint_offset = 0.0
+shader_parameter/tint_lerp = 0.0
+shader_parameter/tint_color = SubResource("GradientTexture1D_0smlk")

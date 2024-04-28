@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbrcmb8bir06f"
-path="res://.godot/imported/pole holder.png-89807f5b8c9add0c75add4624bf56a94.ctex"
+uid="uid://co5g4ttlvg6nh"
+path="res://.godot/imported/Pole Holder.png-f2174ad82bf62852a1946871f179d8e7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tiles/pole holder.png"
-dest_files=["res://.godot/imported/pole holder.png-89807f5b8c9add0c75add4624bf56a94.ctex"]
+source_file="res://tiles/Pole Holder.png"
+dest_files=["res://.godot/imported/Pole Holder.png-f2174ad82bf62852a1946871f179d8e7.ctex"]
 
 [params]
 

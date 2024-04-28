@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://m326sp51wqcq"
-path="res://.godot/imported/Thick Pipe Vertical Filler.png-f16d25f863f171f83b63a6ed0c60330a.ctex"
+uid="uid://cmw5t52u06xu6"
+path="res://.godot/imported/Thick pipe vertical filler.png-5fe724206a4b69b3dd764996bee795d3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tiles/Thick Pipe Vertical Filler.png"
-dest_files=["res://.godot/imported/Thick Pipe Vertical Filler.png-f16d25f863f171f83b63a6ed0c60330a.ctex"]
+source_file="res://tiles/Thick pipe vertical filler.png"
+dest_files=["res://.godot/imported/Thick pipe vertical filler.png-5fe724206a4b69b3dd764996bee795d3.ctex"]
 
 [params]
 

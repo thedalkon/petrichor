@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pquyxnkb0scm"
-path="res://.godot/imported/pipishBendRD.png-84858c05d5ac22a58911ab996fcd19ed.ctex"
+uid="uid://boetqpciqb0e6"
+path="res://.godot/imported/PipishBendRD.png-3d8d3facea5f29629da81110dd0913ac.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tiles/pipishBendRD.png"
-dest_files=["res://.godot/imported/pipishBendRD.png-84858c05d5ac22a58911ab996fcd19ed.ctex"]
+source_file="res://tiles/PipishBendRD.png"
+dest_files=["res://.godot/imported/PipishBendRD.png-3d8d3facea5f29629da81110dd0913ac.ctex"]
 
 [params]
 

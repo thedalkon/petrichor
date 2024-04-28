@@ -278,17 +278,6 @@ theme_override_fonts/font = ExtResource("7_wy4pa")
 theme_override_font_sizes/font_size = 13
 text = "Secondary Tool: Air"
 
-[node name="LayerLabel" type="Label" parent="ToolPanel"]
-unique_name_in_owner = true
-layout_mode = 0
-offset_left = 80.0
-offset_top = 32.0
-offset_right = 146.0
-offset_bottom = 55.0
-theme_override_fonts/font = ExtResource("7_wy4pa")
-theme_override_font_sizes/font_size = 13
-text = "Layer: 1"
-
 [node name="DragPanel" type="Panel" parent="ToolPanel"]
 layout_mode = 0
 offset_top = -10.0

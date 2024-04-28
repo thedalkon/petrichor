@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://de14pyhngxdv5"
-path="res://.godot/imported/exhaust vent closed.png-5800116e6b638fad9fbffda820847569.ctex"
+uid="uid://by10d8wgu23yl"
+path="res://.godot/imported/Exhaust Vent Closed.png-382a3b6655bb162757c780d9fdb9cae2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tiles/exhaust vent closed.png"
-dest_files=["res://.godot/imported/exhaust vent closed.png-5800116e6b638fad9fbffda820847569.ctex"]
+source_file="res://tiles/Exhaust Vent Closed.png"
+dest_files=["res://.godot/imported/Exhaust Vent Closed.png-382a3b6655bb162757c780d9fdb9cae2.ctex"]
 
 [params]
 

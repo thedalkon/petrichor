@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2jxceq6vq15d"
-path="res://.godot/imported/four holes.png-61390a92f28d639e4791384d3a28cc71.ctex"
+uid="uid://dn655fdm1w6ji"
+path="res://.godot/imported/Four Holes.png-330c413b9921868d3e53bc964b1965cc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://tiles/four holes.png"
-dest_files=["res://.godot/imported/four holes.png-61390a92f28d639e4791384d3a28cc71.ctex"]
+source_file="res://tiles/Four Holes.png"
+dest_files=["res://.godot/imported/Four Holes.png-330c413b9921868d3e53bc964b1965cc.ctex"]
 
 [params]
 
