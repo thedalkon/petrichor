@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Godot;
 using Petrichor.scripts.GeoEditor;
 
@@ -8,13 +9,14 @@ public partial class TileLayer : GeoLayer
 {
     private Material _tileLayerMat;
     private Material _renderMat;
+
+    private int i = 0;
     
     public TileLayer(int layer) : base(layer)
     {
         _tileLayerMat = ResourceLoader.Load<ShaderMaterial>("res://materials/tile_layer_mat.tres", null,
             ResourceLoader.CacheMode.Ignore);
-        _renderMat = ResourceLoader.Load<ShaderMaterial>("res://materials/tile_render_mat.tres", null,
-            ResourceLoader.CacheMode.Ignore);
+        _renderMat = ResourceLoader.Load<ShaderMaterial>("res://materials/tile_render_mat.tres"); //Set to ignore if layer shader params are added
         Material = TileEditor.RenderMode ? _renderMat : _tileLayerMat;
     }
     
@@ -58,25 +60,28 @@ public partial class TileLayer : GeoLayer
                         new Rect2(new Vector2(x, y) * Petrichor.ZoomFactor,
                             new Vector2(Petrichor.ZoomFactor, Petrichor.ZoomFactor)), false);
                 }
+            }
+        }
 
+        for (int x = 0; x < GeometryEditor.LevelSize.X; x++)
+        {
+            for (int y = 0; y < GeometryEditor.LevelSize.Y; y++)
+            {
                 // Draw Tile
                 string tileName = TileEditor.Data[Layer, x, y];
                 if (!string.IsNullOrWhiteSpace(tileName) && TileEditor.Tiles.TryGetValue(tileName, out Tile tile))
                 {
+                    Texture2D texture = TileEditor.GetTileTexture(tileName);
                     if (TileEditor.RenderMode)
                     {
-                        for (int i = 0; i < tile.RenderRects.Length; i++)
-                        {
-                            float j = (tile.RenderRects.Length - i) / 4.0f;
-                            DrawTextureRectRegion(TileEditor.GetTileTexture(tileName),
-                                new Rect2((new Vector2(x, y) - Vector2.One * tile.BfTiles) * Petrichor.ZoomFactor,
-                                    (tile.Size + Vector2.One * tile.BfTiles * 2) * Petrichor.ZoomFactor),
-                                tile.RenderRects[i], new Color(1.0f / j, 1.0f / j, 1.0f / j));
-                        }
+                        DrawTextureRect(texture, 
+                            new Rect2((new Vector2(x, y) - Vector2.One * 2 * tile.BfTiles) * Petrichor.ZoomFactor,
+                                texture.GetSize() * Petrichor.ZoomFactor / 16.0f), false, 
+                            Utils.Color8((int)tile.Size.X, (int)tile.Size.Y, tile.RepeatLines.Length, tile.BfTiles)); // This somehow works
                     }
                     else
                     {
-                        DrawTextureRectRegion(TileEditor.GetTileTexture(tileName),
+                        DrawTextureRectRegion(texture,
                             new Rect2(new Vector2(x, y) * Petrichor.ZoomFactor, tile.Size * Petrichor.ZoomFactor),
                             tile.PreviewRect, tile.Color);
                     }

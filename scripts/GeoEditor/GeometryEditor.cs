@@ -8,7 +8,7 @@ namespace Petrichor.scripts.GeoEditor;
 
 public partial class GeometryEditor : Editor
 {
-	public static Vector2I LevelSize = new(36, 22);
+	public static Vector2I LevelSize = new(48, 35);
 	public static int CurrentTool = 0;
 	public static int CurrentSecondaryTool = 1;
 	private static float ZoomFactor => Petrichor.ZoomFactor; 

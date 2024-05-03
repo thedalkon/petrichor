@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using Godot;
 using Petrichor.scripts.GeoEditor;
 
@@ -7,6 +9,9 @@ namespace Petrichor.scripts;
 
 public partial class Petrichor : Control
 {
+    public static UserData UserData = new();
+    private string _userDataPath = OS.GetUserDataDir() + "/userdata.data";
+    
     private Timer _oneSecTimer;
 
     private static Dictionary<string, Editor> _editors;
@@ -25,10 +30,11 @@ public partial class Petrichor : Control
     public static Vector2 RelativeMousePos = Vector2.Zero;
     
     private static Vector2 _cameraPos = Vector2.Zero;
+    
     public static Vector2 CameraPos
     {
         get => _cameraPos;
-        set
+        private set
         {
             _cameraPos = value;
             foreach (GeoLayer layer in LayerInstances)
@@ -37,7 +43,26 @@ public partial class Petrichor : Control
             }
         }
     }
-    
+
+    public override void _EnterTree()
+    {
+        if (!File.Exists(_userDataPath))
+        {
+            Debug.WriteLine(Utils.INFO_STR + "No user data found, creating new.");
+            return;
+        }
+        
+        Debug.WriteLine(Utils.INFO_STR + "Loading user data.");
+        UserData = UserData.Load(_userDataPath);
+        Debug.WriteLine(Utils.INFO_STR + "User data loaded.");
+    }
+
+    public override void _ExitTree()
+    {
+        Debug.WriteLine(Utils.INFO_STR + "Saving user data.");
+        UserData.Save(_userDataPath);
+    }
+
     public override void _Ready()
     {
         DisplayServer.WindowSetTitle("Petrichor");
@@ -150,6 +175,7 @@ public partial class Petrichor : Control
         float ramUsage = MathF.Round(OS.GetStaticMemoryUsage() * 0.000001f, 2);
         GetNode<Label>("%PerformanceLabel").Text = 
             "RAM: " + ramUsage + "MB\n" +
-            "FPS: " + Engine.GetFramesPerSecond();
+            "FPS: " + Engine.GetFramesPerSecond() + "\n" +
+            "Draw Calls: " + Performance.GetMonitor(Performance.Monitor.RenderTotalDrawCallsInFrame);
     }
 }

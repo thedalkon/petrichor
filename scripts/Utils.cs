@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using Godot;
 using Petrichor.scripts.Lingo;
 
@@ -129,7 +130,12 @@ public static class Utils
 
     public static Color Color8(int r, int g, int b)
     {
-        return new Color(r * 0.00392156862f, g * 0.00392156862f, b * 0.00392156862f);
+        return new Color(r / 255f, g / 255f, b / 255f);
+    }
+    
+    public static Color Color8(int r, int g, int b, int a)
+    {
+        return new Color(r / 255f, g / 255f, b / 255f, a / 255f);
     }
     
     // This thing is so fucking slow, not using it
@@ -154,7 +160,27 @@ public static class Utils
             }
         }
     }
-    
+
+    public static List<T> LoadFolder<T>(string path, ResourceLoader.CacheMode mode, bool global = true) where T : Resource
+    {
+        if (global) path = ProjectSettings.GlobalizePath(path);
+        
+        List<string> filePaths = Directory.EnumerateFiles(path).ToList();
+        List<T> files = new();
+
+        foreach (string t in filePaths)
+        {
+            if (!t.EndsWith(".import"))
+            {
+                T res = ResourceLoader.Load<T>(t, "", mode);
+                res.ResourceName = Path.GetFileNameWithoutExtension(t);
+                files.Add(res);
+            }
+        }
+
+        return files;
+    }
+
     public static class FlagsHelper
     {
         public static bool IsSet<T>(T flags, T flag) where T : struct
