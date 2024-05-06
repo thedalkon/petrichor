@@ -16,17 +16,17 @@ public class SelectRectGeoTool : GeoTool
         {
             _startCell = cellPos;
             _selecting = true;
-            GeoEditor.GeometryEditor.GeoTooltip.OverrideTooltip = true;
+            GeometryEditor.GeoTooltip.OverrideTooltip = true;
         }
 
         if (!_selecting) return;
         
         _endCell = cellPos;
-        GeoEditor.GeometryEditor.GeoTooltip.TooltipRect = new Rect2((Vector2)_startCell * Petrichor.ZoomFactor + Petrichor.CameraPos,
+        GeometryEditor.GeoTooltip.TooltipRect = new Rect2((Vector2)_startCell * Petrichor.ZoomFactor + Petrichor.CameraPos,
             (Vector2)(_endCell - _startCell) * Petrichor.ZoomFactor + Vector2.One * Petrichor.ZoomFactor);
-        _rectSize = (Vector2I)(GeoEditor.GeometryEditor.GeoTooltip.TooltipRect.Size / Petrichor.ZoomFactor);
+        _rectSize = (Vector2I)(GeometryEditor.GeoTooltip.TooltipRect.Size / Petrichor.ZoomFactor);
         
-        GeoEditor.GeometryEditor.GeoTooltip.TooltipText =
+        GeometryEditor.GeoTooltip.TooltipText =
             "x: " + _rectSize.X + " y: " + _rectSize.Y;
     }
 

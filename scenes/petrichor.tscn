@@ -1,9 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://d4fk1yy7pijgi"]
+[gd_scene load_steps=10 format=3 uid="uid://d4fk1yy7pijgi"]
 
 [ext_resource type="Script" path="res://scripts/Petrichor.cs" id="1_1sfrw"]
 [ext_resource type="PackedScene" uid="uid://c4hakpmjxmoeu" path="res://scenes/geo_editor.tscn" id="1_h7bvq"]
 [ext_resource type="PackedScene" uid="uid://b0a2elljnji67" path="res://scenes/tile_editor.tscn" id="3_cye6d"]
 [ext_resource type="Script" path="res://scripts/InputController.cs" id="4_jt3wr"]
+[ext_resource type="Shader" path="res://shaders/grid.gdshader" id="5_tdp2h"]
+[ext_resource type="Shader" path="res://shaders/TILE_TEST.gdshader" id="6_gi7av"]
+[ext_resource type="Texture2D" uid="uid://varqawdd6aji" path="res://Harvester A.png" id="7_f5b8e"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yc10c"]
+shader = ExtResource("5_tdp2h")
+shader_parameter/grid_size = Vector2(768, 560)
+shader_parameter/cell_size = 16.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bfor6"]
+shader = ExtResource("6_gi7av")
 
 [node name="Petrichor" type="Control"]
 layout_mode = 3
@@ -110,7 +121,6 @@ unique_name_in_owner = true
 size = Vector2i(160, 100)
 item_count = 2
 item_0/text = "Reset Camera Position"
-item_0/id = 0
 item_1/text = "Reset Window Positions"
 item_1/id = 1
 
@@ -119,3 +129,31 @@ unique_name_in_owner = true
 
 [node name="InputController" type="Node" parent="."]
 script = ExtResource("4_jt3wr")
+
+[node name="GridRect" type="ColorRect" parent="."]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_yc10c")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.184
+anchor_top = 0.205
+anchor_right = 0.818
+anchor_bottom = 0.79
+offset_left = -0.00802612
+offset_top = -0.185013
+offset_right = -0.416016
+offset_bottom = -0.0300293
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HarvesterA" type="TextureRect" parent="."]
+visible = false
+self_modulate = Color(0, 0.0431373, 0.0392157, 0.00784314)
+material = SubResource("ShaderMaterial_bfor6")
+layout_mode = 0
+offset_left = 483.0
+offset_top = 332.0
+offset_right = 723.0
+offset_bottom = 3509.0
+texture = ExtResource("7_f5b8e")

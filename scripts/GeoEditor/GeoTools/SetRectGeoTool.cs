@@ -47,10 +47,9 @@ public class SetRectGeoTool : GeoTool
         {
             for (int y = 0; y < Math.Abs(_rectSize.Y); y++)
             {
+                GeometryEditor.Layers[Petrichor.CurrentLayer].SetCellMesh(GeometryEditor.CellTextures[_cellType], _startCell.X + x * growSign.X, _startCell.Y + y * growSign.Y);
                 GeometryEditor.Data[layer, _startCell.X + x * growSign.X, _startCell.Y + y * growSign.Y].Type = (int)_cellType;
             }
         }
-        
-        GeometryEditor.RedrawTerrain();
     }
 }

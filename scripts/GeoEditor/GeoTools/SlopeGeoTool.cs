@@ -30,8 +30,9 @@ public class SlopeGeoTool : GeoTool
                 (int)CellTypes.Air) continue;
             
             CellTypes slopeType = _slopeDirections[dir];
+
+            GeometryEditor.Layers[Petrichor.CurrentLayer].SetCellMesh(GeometryEditor.CellTextures[slopeType], cellPos.X, cellPos.Y);
             GeometryEditor.SetCell(layer, cellPos.X, cellPos.Y, slopeType);
-            GeometryEditor.RedrawTerrain();
         }
     }
 }

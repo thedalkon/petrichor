@@ -1,0 +1,5 @@
+[folding]
+
+node_unfolds=[NodePath("GeoEditor"), PackedStringArray("Material"), NodePath("ZoomLabel"), PackedStringArray("Layout", "Layout/Transform"), NodePath("LayerLabel"), PackedStringArray("Layout", "Layout/Transform"), NodePath("MenuBar/View"), PackedStringArray("item_count_array"), NodePath("GridRect"), PackedStringArray("Layout/Transform", "Mouse"), NodePath("HarvesterA"), PackedStringArray("Material", "material", "Visibility")]
+resource_unfolds=["res://scenes/petrichor.tscn::ShaderMaterial_yc10c", PackedStringArray(), "res://scenes/petrichor.tscn::ShaderMaterial_bfor6", PackedStringArray()]
+nodes_folded=[NodePath("MenuBar")]

@@ -1,5 +1,7 @@
-MultiMeshInstance2D
 TextureRect
+ColorRect
+MeshInstance2D
+MultiMeshInstance2D
 Sprite2D
 Control
 Node
@@ -10,6 +12,3 @@ Label
 RichTextLabel
 Tree
 ScrollContainer
-MenuBar
-LineEdit
-ColorRect

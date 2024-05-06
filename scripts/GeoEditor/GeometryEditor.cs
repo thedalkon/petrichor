@@ -16,7 +16,6 @@ public partial class GeometryEditor : Editor
 	public static Cell[,,] Data;
 	
 	public static event EventHandler ChangedTool;
-	public static event EventHandler TerrainRedrawn;
 
 	public override string Controls => 
 		"Left click: Use / set primary tool\n" +
@@ -86,9 +85,9 @@ public partial class GeometryEditor : Editor
 
 	public static readonly GeoLayer[] Layers =
 	{
-		new(2),
+		new(0),
 		new(1),
-		new(0)
+		new(2)
 	};
 
 	public static readonly Tooltip GeoTooltip = new();
@@ -100,6 +99,14 @@ public partial class GeometryEditor : Editor
 		foreach (var layer in Layers)
 		{
 			AddChild(layer);
+			foreach (Texture2D i in CellTextures.Values)
+			{
+				layer.AddMultiMeshType(i);
+			}
+			foreach (Texture2D i in StackableTextures.Values)
+			{
+				layer.AddMultiMeshType(i);
+			}
 		}
 		AddChild(GeoTooltip);
 	}
@@ -138,7 +145,7 @@ public partial class GeometryEditor : Editor
 
 	public override void _Draw()
 	{
-		DrawRect(Petrichor.LevelRect.Grow(3), Colors.White, false, 2);
+		DrawRect(Petrichor.LevelRect, Colors.White, false, 2);
 		
 		// Cursor tooltips
 		if (IsInLevelRect())
@@ -223,8 +230,8 @@ public partial class GeometryEditor : Editor
 				currentEntry++;
 			}
 		}
-		
-		RedrawTerrain();
+
+		Layers[Petrichor.CurrentLayer].FullRedraw();
 	}
 
 	public static bool IsInLevelRect(out Vector2I cellPos)
@@ -249,14 +256,6 @@ public partial class GeometryEditor : Editor
 		if (ChangedTool != null) 
 			ChangedTool.Invoke(null, EventArgs.Empty);
 		GeoTooltip.OverrideTooltip = false;
-	}
-
-	public static void RedrawTerrain()
-	{
-		Layers[2].QueueRedraw();
-		Layers[1].QueueRedraw();
-		Layers[0].QueueRedraw();
-		TerrainRedrawn?.Invoke(null, EventArgs.Empty);
 	}
 }
 

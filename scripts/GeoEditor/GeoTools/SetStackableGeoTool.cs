@@ -16,14 +16,20 @@ public class SetStackableGeoTool : GeoTool
     {
         if (Input.IsActionJustPressed("mouse_any"))
         {
-            adding = !GeoEditor.GeometryEditor.HasStackable(layer, cellPos.X, cellPos.Y, _stackableType);
+            adding = !GeometryEditor.HasStackable(layer, cellPos.X, cellPos.Y, _stackableType);
         }
         
         if (adding)
-            GeoEditor.GeometryEditor.AddStackable(layer, cellPos.X, cellPos.Y, _stackableType);
+        {
+            GeometryEditor.AddStackable(layer, cellPos.X, cellPos.Y, _stackableType);
+            GeometryEditor.Layers[Petrichor.CurrentLayer].AddStackableMesh(GeometryEditor.StackableTextures[_stackableType], cellPos.X, cellPos.Y);
+        }
         else 
-            GeoEditor.GeometryEditor.RemoveStackable(layer, cellPos.X, cellPos.Y, _stackableType);
+        {
+            GeometryEditor.RemoveStackable(layer, cellPos.X, cellPos.Y, _stackableType);
+            GeometryEditor.Layers[Petrichor.CurrentLayer].RemoveStackableMesh(GeometryEditor.StackableTextures[_stackableType], cellPos.X, cellPos.Y);
+        }
         
-        GeometryEditor.RedrawTerrain();
+        
     }
 }

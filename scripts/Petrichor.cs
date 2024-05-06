@@ -18,11 +18,37 @@ public partial class Petrichor : Control
 
     public static Editor CurrentEditor;
     
-    public static List<GeoLayer> LayerInstances = new();
+    public static List<Layer> LayerInstances = new();
 
     // ReSharper disable once InconsistentNaming
-    public static float ZoomFactor = 16.0f;
-    public static Rect2 LevelRect;
+    private static float _zoomFactor = 16.0f;
+    public static float ZoomFactor
+    {
+        get => _zoomFactor;
+        set
+        {
+            _zoomFactor = value;
+            foreach (Layer layer in LayerInstances)
+            {
+                layer.Scale = Vector2.One * _zoomFactor / 16.0f;
+            }
+        }
+    }
+
+    private static Rect2 _levelRect;
+    public static Rect2 LevelRect
+    {
+        get => _levelRect;
+        private set
+        {
+            _levelRect = value;
+            GridRect.GlobalPosition = value.Position;
+            GridRect.SetDeferred("size", value.Size);
+            ((ShaderMaterial)GridRect.Material).SetShaderParameter("grid_size", value.Size);
+            ((ShaderMaterial)GridRect.Material).SetShaderParameter("cell_size", ZoomFactor);
+        }
+    }
+
     public static int CurrentLayer;
     
     public static Vector2 MousePos = Vector2.Zero;
@@ -37,12 +63,15 @@ public partial class Petrichor : Control
         private set
         {
             _cameraPos = value;
-            foreach (GeoLayer layer in LayerInstances)
+            foreach (Layer layer in LayerInstances)
             {
                 layer.GlobalPosition = CameraPos;
             }
+            GridRect.GlobalPosition = value;
         }
     }
+
+    public static ColorRect GridRect;
 
     public override void _EnterTree()
     {
@@ -69,6 +98,7 @@ public partial class Petrichor : Control
         _oneSecTimer = new Timer() { OneShot = false, Autostart = true };
         AddChild(_oneSecTimer);
         _oneSecTimer.Timeout += UpdatePerformanceLabels;
+        GridRect = GetNode<ColorRect>("%GridRect");
 
         _editors = new Dictionary<string, Editor>
         {
@@ -122,7 +152,6 @@ public partial class Petrichor : Control
         {
             ZoomFactor = 16.0f;
             CameraPos = GetViewport().GetVisibleRect().GetCenter() - (Vector2)GeometryEditor.LevelSize * ZoomFactor * 0.5f;
-            GeometryEditor.RedrawTerrain();
             LevelRect = new Rect2(CameraPos, (Vector2)GeometryEditor.LevelSize * ZoomFactor);
             GetNode<Label>("%ZoomLabel").Text = "Zoom: " + Math.Round(ZoomFactor / 16.0f * 100.0f, 3) + "%";
         }
@@ -142,14 +171,12 @@ public partial class Petrichor : Control
         if (Input.IsActionJustPressed("scroll_up"))
         {
             ZoomFactor = Mathf.Clamp(ZoomFactor + 1.0f, 0.0f, Mathf.Inf);
-            GeometryEditor.RedrawTerrain();
             LevelRect = new Rect2(CameraPos, (Vector2)GeometryEditor.LevelSize * ZoomFactor);
             GetNode<Label>("%ZoomLabel").Text = "Zoom: " + Math.Round(ZoomFactor / 16.0f * 100.0f, 3) + "%"; 
         }
         if (Input.IsActionJustPressed("scroll_down"))
         {
             ZoomFactor = Mathf.Clamp(ZoomFactor - 1.0f, 0.0f, Mathf.Inf);
-            GeometryEditor.RedrawTerrain();
             LevelRect = new Rect2(CameraPos, (Vector2)GeometryEditor.LevelSize * ZoomFactor);
             GetNode<Label>("%ZoomLabel").Text = "Zoom: " + Math.Round(ZoomFactor / 16.0f * 100.0f, 3) + "%";
         }

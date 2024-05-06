@@ -9,15 +9,15 @@ uniform bool color_key;
 void fragment() {
 	vec3 tex = COLOR.rgb;
 	float depth = tex.g * float(layers - 1);
-	
+
 	if (texture(TEXTURE, UV).rgb == vec3(1, 1, 1))
 		discard;
-	
+
 	if (int(floor(depth)) < current_layer)
 		discard;
 	else
 		COLOR.rgb = tex;
-	
+
 	float paletteDepth = 0.9 - floor(depth - 1.0) / 30.0;
 	float fog_intensity = texture(palette, vec2(9.0 / 32.0, 0.0)).r;
 	vec4 sampleCol = textureLod(TEXTURE, UV - shadow_offset * 0.01, 1.0);

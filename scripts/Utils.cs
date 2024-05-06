@@ -18,7 +18,14 @@ public static class Utils
     public const string WARNING_STR = "\x1b[93m[WARNING]\x1b[97m ";
     public const string CHECK_STR = "\x1b[92m[CHECK]\x1b[97m ";
     public const string TEST_STR = "\x1b[95m[TEST]\x1b[97m ";
-    
+
+    public static Transform2D Tr2DZero = new Transform2D(0.0f, Vector2.Inf);
+
+    public static int Size(this Vector2 vec2) => (int)(vec2.X * vec2.Y);
+    public static int Size(this Vector2I vec2) => vec2.X * vec2.Y;
+
+    public static T[] EnumArray<T>() => (T[])Enum.GetValues(typeof(T));
+
     public static string Trim(this string str, int fromStart, int fromEnd)
     {
         char[] chars = new char[str.Length - fromStart - fromEnd];
@@ -130,14 +137,19 @@ public static class Utils
 
     public static Color Color8(int r, int g, int b)
     {
-        return new Color(r / 255f, g / 255f, b / 255f);
+        return new Color(r / 255.0f, g / 255.0f, b / 255.0f);
     }
     
     public static Color Color8(int r, int g, int b, int a)
     {
-        return new Color(r / 255f, g / 255f, b / 255f, a / 255f);
+        return new Color(r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f);
     }
-    
+
+    public static Color Color8(float r, float g, float b, float a)
+    {
+        return new Color(r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f);
+    }
+
     // This thing is so fucking slow, not using it
     public static bool FileExistsCaseSensitive(string filename)
     {

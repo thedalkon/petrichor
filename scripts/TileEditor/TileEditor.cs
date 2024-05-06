@@ -39,9 +39,9 @@ public partial class TileEditor : Editor
 
     private static readonly TileLayer[] Layers =
     {
-        new(2),
+        new(0),
         new(1),
-        new(0)
+        new(2)
     };
 
     private static readonly Dictionary<string, string> TilePaths = new();
@@ -61,7 +61,7 @@ public partial class TileEditor : Editor
     {
         FileDialog tileDialog = GetNode<FileDialog>("%TileFolderDialog");
         Data = new string[3, GeometryEditor.LevelSize.X, GeometryEditor.LevelSize.Y];
-        Data.Fill3D("");
+        Data.Fill3D(null);
 
         tileDialog.Confirmed += TileDialogClose;
         tileDialog.Canceled += TileDialogClose;
@@ -81,7 +81,7 @@ public partial class TileEditor : Editor
         Stopwatch stopwatch = Stopwatch.StartNew();
         TileCategories = LingoParser.ParseFromFile(Petrichor.UserData.SavedTileDir + "Init.txt");
         
-        Console.WriteLine(Utils.CHECK_STR + "Init.txt parsed in " + Math.Round(stopwatch.Elapsed.TotalMilliseconds) + "ms");
+        Debug.WriteLine(Utils.CHECK_STR + "Init.txt parsed in " + Math.Round(stopwatch.Elapsed.TotalMilliseconds) + "ms");
 
         Tree tilesTree = GetNode<Tree>("%TilesTree");
         
@@ -99,9 +99,15 @@ public partial class TileEditor : Editor
         foreach (TileLayer layer in Layers)
         {
             AddChild(layer);
+            foreach (Texture2D i in GeometryEditor.CellTextures.Values)
+			{
+				layer.AddMultiMeshType(i).ZIndex = -1;
+			}
+			foreach (Texture2D i in GeometryEditor.StackableTextures.Values)
+			{
+				layer.AddMultiMeshType(i).ZIndex = -1;
+			}
         }
-
-        GeometryEditor.TerrainRedrawn += RedrawTerrain;
         
         stopwatch.Restart();
         
@@ -149,7 +155,7 @@ public partial class TileEditor : Editor
             }
         }
         
-        Console.WriteLine(Utils.CHECK_STR + "Tiles checked in " + Math.Round(stopwatch.Elapsed.TotalMilliseconds) + "ms");
+        Debug.WriteLine(Utils.CHECK_STR + "Tiles checked in " + Math.Round(stopwatch.Elapsed.TotalMilliseconds) + "ms");
         
         LoadPalettes();
     }
@@ -160,29 +166,42 @@ public partial class TileEditor : Editor
 
         if (Input.IsActionPressed("mouse_left") && !DraggableControl.IsDragging && !DraggableControl.OverControl)
         {
+            if (string.IsNullOrEmpty(_currentTile)) return;
             if (!GeometryEditor.IsInLevelRect(out Vector2I cellPos)) return;
-            if (Data[Petrichor.CurrentLayer, cellPos.X, cellPos.Y] == CurrentTile.Name) return;
+            if (Data[Petrichor.CurrentLayer, cellPos.X, cellPos.Y] == _currentTile) return;
 
+            Texture2D tileTex = GetTileTexture(_currentTile);
+            if (tileTex == null)
+                return;
+            
+            Tile currTile = CurrentTile;
+            if (!Layers[Petrichor.CurrentLayer].MultiMeshes.ContainsKey(tileTex))
+                Layers[Petrichor.CurrentLayer].AddMultiMeshType(tileTex, currTile.Color,
+                Utils.Color8(currTile.Size.X, currTile.Size.Y, currTile.RepeatLines.Length, currTile.BfTiles));
+            
+            Layers[Petrichor.CurrentLayer].SetTileMesh(tileTex, cellPos.X, cellPos.Y);
             Data[Petrichor.CurrentLayer, cellPos.X, cellPos.Y] = CurrentTile.Name;
-            RedrawTerrain(null, new EventArgs());
         }
+
         else if (Input.IsActionPressed("mouse_right") && !DraggableControl.IsDragging && !DraggableControl.OverControl)
         {
             if (!GeometryEditor.IsInLevelRect(out Vector2I cellPos)) return;
-            if (Data[Petrichor.CurrentLayer, cellPos.X, cellPos.Y] == "") return;
+            if (string.IsNullOrEmpty(Data[Petrichor.CurrentLayer, cellPos.X, cellPos.Y])) return;
             
-            Data[Petrichor.CurrentLayer, cellPos.X, cellPos.Y] = "";
-            RedrawTerrain(null, EventArgs.Empty);
+            Texture2D tileTex = GetTileTexture(Data[Petrichor.CurrentLayer, cellPos.X, cellPos.Y]);
+            Layers[Petrichor.CurrentLayer].RemoveTileMesh(tileTex, cellPos.X, cellPos.Y);
+            Data[Petrichor.CurrentLayer, cellPos.X, cellPos.Y] = null;
         }
+
         else if (Input.IsActionJustPressed("toggle_view"))
         {
             RenderMode = !RenderMode;
-            RedrawTerrain(null, EventArgs.Empty);
             foreach (var layer in Petrichor.LayerInstances)
             {
                 layer.LayerChanged();
             }
         }
+
         else if (Input.IsActionJustPressed("toggle_shadows"))
         {
             Control shadowControl = GetNode<Control>("%ShadowControl");
@@ -192,7 +211,7 @@ public partial class TileEditor : Editor
 
     public override void _Draw()
     {
-        DrawRect(Petrichor.LevelRect.Grow(3), Colors.White, false, 2);
+        DrawRect(Petrichor.LevelRect, Colors.White, false, 2);
         
         Rect2 shadowCircleRect = GetNode<Control>("%ShadowCircle").GetGlobalRect();
         Control shadowControl = GetNode<Control>("%ShadowControl");
@@ -212,11 +231,6 @@ public partial class TileEditor : Editor
         DrawArc(shadowOrigin, circleRadius * 0.1f, 0, MathF.Tau, 16, Colors.White);
         DrawArc(shadowOrigin, shadowOrigin.DistanceTo(shadowControl.GetGlobalRect().GetCenter()),
             0, MathF.Tau, 32, Colors.White);
-        
-        if (string.IsNullOrWhiteSpace(_currentTile))
-            return;
-        
-        _tilePreview.QueueRedraw();
     }
 
     private void TileDialogClose()
@@ -229,20 +243,13 @@ public partial class TileEditor : Editor
     public static Texture2D GetTileTexture(string tileName)
     {
         if (string.IsNullOrWhiteSpace(tileName))
-            return new Texture2D();
+            return null;
         
         if (TileTextures.TryGetValue(tileName, out Texture2D texture)) 
             return texture;
 
         TileTextures.Add(tileName, ThreadedLoader.GetFileAsync<Texture2D>(TilePaths[tileName]));
         return TileTextures[tileName];
-    }
-
-    private static void RedrawTerrain(object sender, EventArgs args)
-    {
-        Layers[2].QueueRedraw();
-        Layers[1].QueueRedraw();
-        Layers[0].QueueRedraw();
     }
 
     private void SetTileSearch(string searchTerm)
