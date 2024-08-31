@@ -1,5 +1,5 @@
 ﻿using Godot;
-using static Petrichor.scripts.GeoEditor.GeometryEditor;
+using static Petrichor.scripts.Geometry.GeometryEditor;
 using static Petrichor.scripts.Petrichor;
 
 namespace Petrichor.scripts;

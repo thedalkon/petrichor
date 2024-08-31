@@ -17,7 +17,7 @@ public static class LingoParser
         fileList.RemoveAll(s => s.StartsWith("--"));
         string[] fileLines = fileList.ToArray();
         
-        List<int> categoryLines = new List<int>();
+        List<int> categoryLines = new();
         for (int i = 0; i < fileLines.Length; i++)
         {
             if (fileLines[i].StartsWith('-'))
@@ -37,7 +37,7 @@ public static class LingoParser
             
             if (subLines < 1)
             {
-                LingoCategory emptyCat = LingoCategory.FromString(fileLines[categoryLines[i]], new string[]{});
+                LingoCategory emptyCat = LingoCategory.FromString(fileLines[categoryLines[i]], Array.Empty<string>());
                 Debug.WriteLine(Utils.WARNING_STR + "Category " + emptyCat.Name + " is empty, skipping.");
                 continue;
             }
@@ -107,6 +107,8 @@ public static class LingoParser
 
         if (value.StartsWith('[')) // Linear List
         {
+            if (value.StartsWith("[#"))
+                return LingoPropertyList.FromString(value);
             return LingoLinearList.FromString(value);
         }
 
@@ -152,6 +154,14 @@ public class LingoLinearList
 {
     public object[] Values;
 
+    public object this[int i]
+   {
+      get { return Values[i]; }
+      set { Values[i] = value; }
+   }
+
+    public int Length => Values.Length;
+
     private LingoLinearList(object[] values)
     {
         Values = values;
@@ -172,6 +182,12 @@ public class LingoLinearList
 public class LingoPropertyList
 {
     public readonly LingoProperty[] Properties;
+    
+    public LingoProperty this[int i]
+   {
+      get { return Properties[i]; }
+      set { Properties[i] = value; }
+   }
 
     private LingoPropertyList(LingoProperty[] properties)
     {
@@ -190,7 +206,7 @@ public class LingoPropertyList
         return new LingoPropertyList(properties);
     }
 
-    public LingoProperty? GetProperty(string tag)
+    public LingoProperty GetProperty(string tag)
     {
         for (int i = 0; i < Properties.Length; i++)
         {
@@ -202,7 +218,7 @@ public class LingoPropertyList
     }
 }
 
-public struct LingoProperty
+public class LingoProperty
 {
     public readonly string Tag;
     public readonly object Value;
@@ -215,7 +231,7 @@ public struct LingoProperty
 
     public static LingoProperty FromString(string str)
     {
-        string[] components = str.Split(':');
+        string[] components = str.Split(':', 2);
         return new LingoProperty(components[0].TrimStart('#'), LingoParser.ParseValue(components[1]));
     }
 }

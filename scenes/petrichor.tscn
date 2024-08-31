@@ -26,9 +26,11 @@ grow_vertical = 2
 script = ExtResource("1_1sfrw")
 
 [node name="GeoEditor" parent="." instance=ExtResource("1_h7bvq")]
+unique_name_in_owner = true
 layout_mode = 1
 
 [node name="TileEditor" parent="." instance=ExtResource("3_cye6d")]
+unique_name_in_owner = true
 visible = false
 layout_mode = 1
 
@@ -112,6 +114,21 @@ theme_override_constants/h_separation = 0
 
 [node name="File" type="PopupMenu" parent="MenuBar"]
 unique_name_in_owner = true
+size = Vector2i(116, 114)
+item_count = 7
+item_0/text = "New Level"
+item_1/text = "Open Level..."
+item_1/id = 1
+item_2/id = 4
+item_2/separator = true
+item_3/text = "Save Level"
+item_3/id = 2
+item_4/text = "Save Level As..."
+item_4/id = 3
+item_5/id = 5
+item_5/separator = true
+item_6/text = "Quit"
+item_6/id = 6
 
 [node name="Edit" type="PopupMenu" parent="MenuBar"]
 unique_name_in_owner = true
@@ -119,10 +136,6 @@ unique_name_in_owner = true
 [node name="View" type="PopupMenu" parent="MenuBar"]
 unique_name_in_owner = true
 size = Vector2i(160, 100)
-item_count = 2
-item_0/text = "Reset Camera Position"
-item_1/text = "Reset Window Positions"
-item_1/id = 1
 
 [node name="Help" type="PopupMenu" parent="MenuBar"]
 unique_name_in_owner = true
@@ -157,3 +170,17 @@ offset_top = 332.0
 offset_right = 723.0
 offset_bottom = 3509.0
 texture = ExtResource("7_f5b8e")
+
+[node name="OpenLevelDialog" type="FileDialog" parent="."]
+unique_name_in_owner = true
+auto_translate_mode = 1
+title = "Open a Level"
+position = Vector2i(97, 94)
+size = Vector2i(640, 468)
+ok_button_text = "Open"
+dialog_hide_on_ok = true
+dialog_close_on_escape = false
+mode_overrides_title = false
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.txt;Text File")

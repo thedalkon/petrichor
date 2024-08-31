@@ -1,15 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "AdTPNnuOB6LaSCP/PlA/jAipcq8Q6DnucDlKBo8t6Xf2vMO2QGZPc8DcHr/3oVOaDlTI2PgLWTl0OAJIWm7ahw==",
+  "dgSpecHash": "TdXevz0d6+rq1vsprTtso2vQhJMn5PyNX+9koGZ1v2lTLaCt8Z9YSWcq8omWfBRboFPrNkH6m+OY5Di3W/eeNg==",
   "success": true,
   "projectFilePath": "D:\\Files 2\\Folders\\Godot Projects\\Petrichor\\Petrichor.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\green\\.nuget\\packages\\godot.sourcegenerators\\4.3.0-dev.6\\godot.sourcegenerators.4.3.0-dev.6.nupkg.sha512",
-    "C:\\Users\\green\\.nuget\\packages\\godotsharp\\4.3.0-dev.6\\godotsharp.4.3.0-dev.6.nupkg.sha512",
-    "C:\\Users\\green\\.nuget\\packages\\godotsharpeditor\\4.3.0-dev.6\\godotsharpeditor.4.3.0-dev.6.nupkg.sha512",
-    "C:\\Users\\green\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.29\\microsoft.netcore.app.ref.6.0.29.nupkg.sha512",
-    "C:\\Users\\green\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.29\\microsoft.windowsdesktop.app.ref.6.0.29.nupkg.sha512",
-    "C:\\Users\\green\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.29\\microsoft.aspnetcore.app.ref.6.0.29.nupkg.sha512"
+    "C:\\Users\\green\\.nuget\\packages\\godot.sourcegenerators\\4.3.0\\godot.sourcegenerators.4.3.0.nupkg.sha512",
+    "C:\\Users\\green\\.nuget\\packages\\godotsharp\\4.3.0\\godotsharp.4.3.0.nupkg.sha512",
+    "C:\\Users\\green\\.nuget\\packages\\godotsharpeditor\\4.3.0\\godotsharpeditor.4.3.0.nupkg.sha512",
+    "C:\\Users\\green\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.28\\microsoft.netcore.app.ref.6.0.28.nupkg.sha512",
+    "C:\\Users\\green\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.28\\microsoft.windowsdesktop.app.ref.6.0.28.nupkg.sha512",
+    "C:\\Users\\green\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.28\\microsoft.aspnetcore.app.ref.6.0.28.nupkg.sha512"
   ],
   "logs": []
 }

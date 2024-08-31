@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://b0a2elljnji67"]
 
-[ext_resource type="Script" path="res://scripts/TileEditor/TileEditor.cs" id="1_hqa2e"]
+[ext_resource type="Script" path="res://scripts/Tiling/TileEditor.cs" id="1_k11di"]
 [ext_resource type="Texture2D" uid="uid://bldfm2w8opfm7" path="res://textures/search_icon.png" id="2_sgb3j"]
 [ext_resource type="Script" path="res://scripts/DraggableControl.cs" id="2_v2tgy"]
 [ext_resource type="Texture2D" uid="uid://dbrkffu6plpnr" path="res://palettes/palette0.png" id="4_vq4oa"]
@@ -18,7 +18,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_hqa2e")
+script = ExtResource("1_k11di")
 
 [node name="TileToolbox" type="Control" parent="."]
 anchors_preset = 0

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Petrichor")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f43916bd634e410c72a11d0cab862155e30a9c88")]
 [assembly: System.Reflection.AssemblyProductAttribute("Petrichor")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Petrichor")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

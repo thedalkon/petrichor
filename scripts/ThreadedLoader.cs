@@ -12,7 +12,7 @@ namespace Petrichor.scripts;
 public static class ThreadedLoader
 {
     private static readonly Dictionary<string, Thread> ActiveThreads = new();
-    private static readonly Dictionary<string, Resource> Requests = new();
+    private static readonly ConcurrentDictionary<string, Resource> Requests = new();
     
     public static void LoadFileAsync<T>(string path)
     {
@@ -20,9 +20,9 @@ public static class ThreadedLoader
             return;
 
         Thread thread = typeof(T) != typeof(Texture2D) ? 
-            new Thread(() => Requests.Add(path, ResourceLoader.Load<Resource>(path))) 
+            new Thread(() => Requests.TryAdd(path, ResourceLoader.Load<Resource>(path))) 
             : 
-            new Thread(() => Requests.Add(path, _LoadTexture(path)));
+            new Thread(() => Requests.TryAdd(path, _LoadTexture(path)));
         
         thread.Start();
         ActiveThreads[path] = thread;
@@ -45,7 +45,7 @@ public static class ThreadedLoader
 
             Resource res = Requests[path];
             ActiveThreads.Remove(path);
-            Requests.Remove(path);
+            Requests.Remove(path, out _);
             return (T)res;
         }
         

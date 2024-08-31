@@ -1,8 +1,8 @@
 [gd_scene load_steps=31 format=3 uid="uid://c4hakpmjxmoeu"]
 
-[ext_resource type="Script" path="res://scripts/GeoEditor/GeometryEditor.cs" id="1_iuboh"]
+[ext_resource type="Script" path="res://scripts/Geometry/GeometryEditor.cs" id="1_ordjd"]
 [ext_resource type="Texture2D" uid="uid://d4et5tsmtgiev" path="res://textures/SolidButton.png" id="2_3f60b"]
-[ext_resource type="Script" path="res://scripts/GeoEditor/GeoToolButton.cs" id="3_os820"]
+[ext_resource type="Script" path="res://scripts/Geometry/GeoToolButton.cs" id="3_fjbfl"]
 [ext_resource type="Texture2D" uid="uid://qgina7ddnro4" path="res://textures/AirButton.png" id="3_sgog6"]
 [ext_resource type="Texture2D" uid="uid://ccjpg57n046jm" path="res://textures/SlopeButton.png" id="4_365xt"]
 [ext_resource type="Texture2D" uid="uid://cgr5o8t68nbfv" path="res://textures/VPoleButton.png" id="6_680qt"]
@@ -42,7 +42,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_iuboh")
+script = ExtResource("1_ordjd")
 
 [node name="ToolPanel" type="Panel" parent="."]
 layout_mode = 0
@@ -69,14 +69,14 @@ self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 button_mask = 3
 texture_normal = ExtResource("2_3f60b")
-script = ExtResource("3_os820")
+script = ExtResource("3_fjbfl")
 
 [node name="AirButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
 self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 button_mask = 3
 texture_normal = ExtResource("3_sgog6")
-script = ExtResource("3_os820")
+script = ExtResource("3_fjbfl")
 ToolNumber = 1
 
 [node name="SlopeButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
@@ -84,7 +84,7 @@ self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 button_mask = 3
 texture_normal = ExtResource("4_365xt")
-script = ExtResource("3_os820")
+script = ExtResource("3_fjbfl")
 ToolNumber = 2
 
 [node name="VPoleButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
@@ -92,7 +92,7 @@ self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 button_mask = 3
 texture_normal = ExtResource("6_680qt")
-script = ExtResource("3_os820")
+script = ExtResource("3_fjbfl")
 ToolNumber = 3
 
 [node name="HPoleButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
@@ -100,7 +100,7 @@ self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 button_mask = 3
 texture_normal = ExtResource("7_cixli")
-script = ExtResource("3_os820")
+script = ExtResource("3_fjbfl")
 ToolNumber = 4
 
 [node name="PlatformButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
@@ -108,7 +108,7 @@ self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 button_mask = 3
 texture_normal = ExtResource("8_gmmrm")
-script = ExtResource("3_os820")
+script = ExtResource("3_fjbfl")
 ToolNumber = 22
 
 [node name="FillRectButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
@@ -116,7 +116,7 @@ self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 button_mask = 3
 texture_normal = ExtResource("7_6sohf")
-script = ExtResource("3_os820")
+script = ExtResource("3_fjbfl")
 ToolNumber = 5
 
 [node name="EraseRectButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
@@ -124,7 +124,7 @@ self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 button_mask = 3
 texture_normal = ExtResource("9_rcefc")
-script = ExtResource("3_os820")
+script = ExtResource("3_fjbfl")
 ToolNumber = 6
 
 [node name="EraseAllButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
@@ -132,7 +132,7 @@ self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 button_mask = 3
 texture_normal = ExtResource("10_dqhu0")
-script = ExtResource("3_os820")
+script = ExtResource("3_fjbfl")
 ToolNumber = 7
 
 [node name="SelectionButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
@@ -140,7 +140,7 @@ self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 button_mask = 3
 texture_normal = ExtResource("12_jvagp")
-script = ExtResource("3_os820")
+script = ExtResource("3_fjbfl")
 ToolNumber = 23
 
 [node name="ShortcutEntButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
@@ -148,7 +148,7 @@ self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 button_mask = 3
 texture_normal = ExtResource("11_gdrtt")
-script = ExtResource("3_os820")
+script = ExtResource("3_fjbfl")
 ToolNumber = 8
 
 [node name="ShortcutPathButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
@@ -156,7 +156,7 @@ self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 button_mask = 3
 texture_normal = ExtResource("12_dt0sj")
-script = ExtResource("3_os820")
+script = ExtResource("3_fjbfl")
 ToolNumber = 9
 
 [node name="RoomEntButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
@@ -164,7 +164,7 @@ self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 button_mask = 3
 texture_normal = ExtResource("13_gdsok")
-script = ExtResource("3_os820")
+script = ExtResource("3_fjbfl")
 ToolNumber = 10
 
 [node name="LizardDenButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
@@ -172,7 +172,7 @@ self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 button_mask = 3
 texture_normal = ExtResource("14_mxice")
-script = ExtResource("3_os820")
+script = ExtResource("3_fjbfl")
 ToolNumber = 11
 
 [node name="SpearButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
@@ -180,7 +180,7 @@ self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 button_mask = 3
 texture_normal = ExtResource("15_57xx8")
-script = ExtResource("3_os820")
+script = ExtResource("3_fjbfl")
 ToolNumber = 12
 
 [node name="RockButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
@@ -188,7 +188,7 @@ self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 button_mask = 3
 texture_normal = ExtResource("16_hqn4v")
-script = ExtResource("3_os820")
+script = ExtResource("3_fjbfl")
 ToolNumber = 13
 
 [node name="CrackedTerrButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
@@ -196,7 +196,7 @@ self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 button_mask = 3
 texture_normal = ExtResource("17_tvl1k")
-script = ExtResource("3_os820")
+script = ExtResource("3_fjbfl")
 ToolNumber = 14
 
 [node name="ForbidBatButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
@@ -204,7 +204,7 @@ self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 button_mask = 3
 texture_normal = ExtResource("18_k4h8o")
-script = ExtResource("3_os820")
+script = ExtResource("3_fjbfl")
 ToolNumber = 15
 
 [node name="BatHiveButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
@@ -212,7 +212,7 @@ self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 button_mask = 3
 texture_normal = ExtResource("19_geyib")
-script = ExtResource("3_os820")
+script = ExtResource("3_fjbfl")
 ToolNumber = 16
 
 [node name="GarbageHoleButton2" type="TextureButton" parent="ToolPanel/ToolGrid"]
@@ -220,7 +220,7 @@ self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 button_mask = 3
 texture_normal = ExtResource("20_uuhyk")
-script = ExtResource("3_os820")
+script = ExtResource("3_fjbfl")
 ToolNumber = 17
 
 [node name="WaterfallButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
@@ -228,7 +228,7 @@ self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 button_mask = 3
 texture_normal = ExtResource("21_0xrtm")
-script = ExtResource("3_os820")
+script = ExtResource("3_fjbfl")
 ToolNumber = 18
 
 [node name="CreatureShortcutButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
@@ -236,7 +236,7 @@ self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 button_mask = 3
 texture_normal = ExtResource("22_0prgm")
-script = ExtResource("3_os820")
+script = ExtResource("3_fjbfl")
 ToolNumber = 19
 
 [node name="WormgrassButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
@@ -244,7 +244,7 @@ self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 button_mask = 3
 texture_normal = ExtResource("23_rk6t3")
-script = ExtResource("3_os820")
+script = ExtResource("3_fjbfl")
 ToolNumber = 20
 
 [node name="ScavengerDenButton" type="TextureButton" parent="ToolPanel/ToolGrid"]
@@ -252,7 +252,7 @@ self_modulate = Color(0, 0, 0, 1)
 layout_mode = 2
 button_mask = 3
 texture_normal = ExtResource("24_0jidt")
-script = ExtResource("3_os820")
+script = ExtResource("3_fjbfl")
 ToolNumber = 21
 
 [node name="ToolLabel" type="Label" parent="ToolPanel"]

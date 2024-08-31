@@ -15,3 +15,4 @@ D:\Files 2\Folders\Godot Projects\Petrichor\.godot\mono\temp\obj\Debug\refint\Pe
 D:\Files 2\Folders\Godot Projects\Petrichor\.godot\mono\temp\obj\Debug\Petrichor.pdb
 D:\Files 2\Folders\Godot Projects\Petrichor\.godot\mono\temp\obj\Debug\Petrichor.genruntimeconfig.cache
 D:\Files 2\Folders\Godot Projects\Petrichor\.godot\mono\temp\obj\Debug\ref\Petrichor.dll
+D:\Files 2\Folders\Godot Projects\Petrichor\.godot\mono\temp\obj\Debug\Petrichor.sourcelink.json

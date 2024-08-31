@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Godot;
 using Petrichor.scripts.Lingo;
+using Petrichor.scripts.Tiling;
 
 // ReSharper disable InconsistentNaming
 
@@ -13,14 +14,22 @@ public static class Utils
 {
     public static readonly FontFile CozzetteFont = (FontFile)ResourceLoader.Load("res://resources/CozetteVector.ttf");
     
-    public const string INFO_STR = "\x1b[97m[INFO]\x1b[97m ";
-    public const string ERROR_STR = "\x1b[91m[ERROR]\x1b[97m ";
-    public const string WARNING_STR = "\x1b[93m[WARNING]\x1b[97m ";
-    public const string CHECK_STR = "\x1b[92m[CHECK]\x1b[97m ";
-    public const string TEST_STR = "\x1b[95m[TEST]\x1b[97m ";
+    public static string INFO_STR => TIME_STR + "\x1b[97m[INFO]\x1b[97m ";
+    public static string ERROR_STR => TIME_STR + "\x1b[91m[ERROR]\x1b[97m ";
+    public static string WARNING_STR => TIME_STR + "\x1b[93m[WARNING]\x1b[97m ";
+    public static string CHECK_STR => TIME_STR + "\x1b[92m[CHECK]\x1b[97m ";
+    public static string TEST_STR => TIME_STR + "\x1b[95m[TEST]\x1b[97m ";
 
-    public static Transform2D Tr2DZero = new Transform2D(0.0f, Vector2.Inf);
+    public static string TIME_STR
+    {
+        get
+        {
+            DateTime dateTime = DateTime.Now;
+            return dateTime.ToShortDateString() + " " + dateTime.ToLongTimeString() + " ";
+        }
+    }
 
+    public static Transform2D Tr2DZero = new (0.0f, Vector2.Inf);
     public static int Size(this Vector2 vec2) => (int)(vec2.X * vec2.Y);
     public static int Size(this Vector2I vec2) => vec2.X * vec2.Y;
 
@@ -191,6 +200,88 @@ public static class Utils
         }
 
         return files;
+    }
+    
+    public static List<Texture2D> LoadImageFolder(string path, ResourceLoader.CacheMode mode, bool global = true)
+    {
+        if (global) path = ProjectSettings.GlobalizePath(path);
+        
+        List<string> filePaths = Directory.EnumerateFiles(path).ToList();
+        List<Texture2D> files = new();
+
+        foreach (string t in filePaths)
+        {
+            if (!t.EndsWith(".import") && (t.EndsWith(".png") || t.EndsWith(".jpg")))
+            {
+                Image image = new();
+                image.LoadPngFromBuffer(File.ReadAllBytes(t));
+                ImageTexture imageTex = ImageTexture.CreateFromImage(image);
+                imageTex.ResourceName = Path.GetFileNameWithoutExtension(t);
+                files.Add(imageTex);
+            }
+        }
+
+        return files;
+    }
+
+    public static int StackablesToFlag(this int[] stackables)
+    {
+        int flags = 0;
+        for (int i = 0; i < stackables.Length; i++)
+        {
+            switch (stackables[i])
+            {
+                case 1:
+                    flags |= 1<<0;
+                    break;
+                case 2:
+                    flags |= 1<<1;
+                    break;
+                case 3:
+                    flags |= 1<<2;
+                    break;
+                case 4:
+                    flags |= 1<<3;
+                    break;
+                case 5:
+                    flags |= 1<<4;
+                    break;
+                case 6:
+                    flags |= 1<<5;
+                    break;
+                case 7:
+                    flags |= 1<<6;
+                    break;
+                case 9:
+                    flags |= 1<<7;
+                    break;
+                case 10:
+                    flags |= 1<<8;
+                    break;
+                case 11:
+                    flags |= 1<<9;
+                    break;
+                case 12:
+                    flags |= 1<<10;
+                    break;
+                case 13:
+                    flags |= 1<<11;
+                    break;
+                case 18:
+                    flags |= 1<<12;
+                    break;
+                case 19:
+                    flags |= 1<<13;
+                    break;
+                case 20:
+                    flags |= 1<<14;
+                    break;
+                case 21:
+                    flags |= 1<<15;
+                    break;
+            }
+        }
+        return flags;
     }
 
     public static class FlagsHelper

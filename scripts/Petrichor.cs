@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 using Godot;
-using Petrichor.scripts.GeoEditor;
+using Petrichor.scripts.Geometry;
 
 namespace Petrichor.scripts;
 
 public partial class Petrichor : Control
 {
+    public static Petrichor Singleton;
+    
     public static UserData UserData = new();
     private string _userDataPath = OS.GetUserDataDir() + "/userdata.data";
     
@@ -18,14 +21,14 @@ public partial class Petrichor : Control
 
     public static Editor CurrentEditor;
     
-    public static List<Layer> LayerInstances = new();
+    public static readonly List<Layer> LayerInstances = new();
 
     // ReSharper disable once InconsistentNaming
     private static float _zoomFactor = 16.0f;
     public static float ZoomFactor
     {
         get => _zoomFactor;
-        set
+        private set
         {
             _zoomFactor = value;
             foreach (Layer layer in LayerInstances)
@@ -73,8 +76,11 @@ public partial class Petrichor : Control
 
     public static ColorRect GridRect;
 
+    FileDialog _openLevelDialogue;
+
     public override void _EnterTree()
     {
+        Singleton = this;
         if (!File.Exists(_userDataPath))
         {
             Debug.WriteLine(Utils.INFO_STR + "No user data found, creating new.");
@@ -108,6 +114,21 @@ public partial class Petrichor : Control
         
         CameraPos = GetViewport().GetVisibleRect().GetCenter() - (Vector2)GeometryEditor.LevelSize * ZoomFactor * 0.5f;
         LevelRect = new Rect2(CameraPos, (Vector2)GeometryEditor.LevelSize * ZoomFactor);
+
+        _openLevelDialogue = GetNode<FileDialog>("%OpenLevelDialog");
+
+        PopupMenu fileMenu = GetNode<PopupMenu>("%File");
+        fileMenu.IndexPressed += FileMenuPressed;
+        _openLevelDialogue.Confirmed += () => _openLevelDialogCompletion.SetResult(true);
+        _openLevelDialogue.FileSelected += _ => _openLevelDialogCompletion.SetResult(true);
+        _openLevelDialogue.Canceled += () => _openLevelDialogCompletion.SetResult(false);
+        fileMenu.SetItemShortcut(0, new Shortcut { Events = (Godot.Collections.Array)InputMap.ActionGetEvents("new_level")});
+        fileMenu.SetItemShortcut(1, new Shortcut { Events = (Godot.Collections.Array)InputMap.ActionGetEvents("open_level")});
+        fileMenu.SetItemShortcut(3, new Shortcut { Events = (Godot.Collections.Array)InputMap.ActionGetEvents("save_level")});
+        fileMenu.SetItemShortcut(4, new Shortcut { Events = (Godot.Collections.Array)InputMap.ActionGetEvents("save_level_as")});
+        fileMenu.SetItemShortcut(6, new Shortcut { Events = (Godot.Collections.Array)InputMap.ActionGetEvents("exit")});
+        
+        SetEditor("open_geo_editor");
     }
 
     public override void _Process(double delta)
@@ -150,10 +171,7 @@ public partial class Petrichor : Control
 
         if (Input.IsActionJustPressed("reset_camera"))
         {
-            ZoomFactor = 16.0f;
-            CameraPos = GetViewport().GetVisibleRect().GetCenter() - (Vector2)GeometryEditor.LevelSize * ZoomFactor * 0.5f;
-            LevelRect = new Rect2(CameraPos, (Vector2)GeometryEditor.LevelSize * ZoomFactor);
-            GetNode<Label>("%ZoomLabel").Text = "Zoom: " + Math.Round(ZoomFactor / 16.0f * 100.0f, 3) + "%";
+            CenterCamera();
         }
     }
 
@@ -169,29 +187,55 @@ public partial class Petrichor : Control
     public override void _UnhandledInput(InputEvent @event)
     {
         if (Input.IsActionJustPressed("scroll_up"))
-        {
-            ZoomFactor = Mathf.Clamp(ZoomFactor + 1.0f, 0.0f, Mathf.Inf);
-            LevelRect = new Rect2(CameraPos, (Vector2)GeometryEditor.LevelSize * ZoomFactor);
-            GetNode<Label>("%ZoomLabel").Text = "Zoom: " + Math.Round(ZoomFactor / 16.0f * 100.0f, 3) + "%"; 
-        }
-        if (Input.IsActionJustPressed("scroll_down"))
-        {
-            ZoomFactor = Mathf.Clamp(ZoomFactor - 1.0f, 0.0f, Mathf.Inf);
-            LevelRect = new Rect2(CameraPos, (Vector2)GeometryEditor.LevelSize * ZoomFactor);
-            GetNode<Label>("%ZoomLabel").Text = "Zoom: " + Math.Round(ZoomFactor / 16.0f * 100.0f, 3) + "%";
-        }
+            ChangeZoom(1f);
+        else if (Input.IsActionJustPressed("scroll_down"))
+            ChangeZoom(-1f);
+    }
+
+    public void ChangeZoom(float factor)
+    {
+        Vector2 mouseDiff = MousePos - CameraPos;
+        float multFactor = (ZoomFactor + factor) / ZoomFactor;
+        CameraPos += mouseDiff - mouseDiff * multFactor;
+        ZoomFactor = Mathf.Max(ZoomFactor + factor, 0.0f);
+        LevelRect = new Rect2(CameraPos, (Vector2)GeometryEditor.LevelSize * ZoomFactor);
+        GetNode<Label>("%ZoomLabel").Text = "Zoom: " + Math.Round(ZoomFactor / 16.0f * 100.0f, 3) + "%"; 
+    }
+
+    public void CenterCamera()
+    {
+        ZoomFactor = 16.0f;
+        CameraPos = GetViewport().GetVisibleRect().GetCenter() - (Vector2)GeometryEditor.LevelSize * ZoomFactor * 0.5f;
+        LevelRect = new Rect2(CameraPos, (Vector2)GeometryEditor.LevelSize * ZoomFactor);
+        GetNode<Label>("%ZoomLabel").Text = "Zoom: " + Math.Round(ZoomFactor / 16.0f * 100.0f, 3) + "%";
     }
 
     private void SetEditor(string action)
     {
+        CurrentEditor = _editors[action];
         foreach (Editor editor in _editors.Values)
         {
-            editor.Hide();
+            editor.QueueRedraw();
+            foreach (Node node in editor.GetChildren())
+            {
+                if (node is GeoLayer) continue;
+                
+                if (node is Control control)
+                    control.Hide();
+                else if (node is Node2D node2D)
+                    node2D.Hide();
+            }
             editor.ProcessMode = ProcessModeEnum.Disabled;
         }
-
-        CurrentEditor = _editors[action];
+        
         CurrentEditor.Show();
+        foreach (Node node in CurrentEditor.GetChildren())
+        {
+            if (node is Control control)
+                control.Show();
+            else if (node is Node2D node2D)
+                node2D.Show();
+        }
         CurrentEditor.ProcessMode = ProcessModeEnum.Inherit;
         GetNode<Label>("%ControlsLabel").Text = CurrentEditor.Controls;
         DisplayServer.WindowSetTitle("Petrichor (" + CurrentEditor.Name + ")");
@@ -204,5 +248,25 @@ public partial class Petrichor : Control
             "RAM: " + ramUsage + "MB\n" +
             "FPS: " + Engine.GetFramesPerSecond() + "\n" +
             "Draw Calls: " + Performance.GetMonitor(Performance.Monitor.RenderTotalDrawCallsInFrame);
+    }
+
+    private TaskCompletionSource<bool> _openLevelDialogCompletion = new();
+
+    private async void FileMenuPressed(long id)
+    {
+        switch (id)
+        {
+            case 1:
+                _openLevelDialogue.PopupCentered();
+                _openLevelDialogCompletion = new();
+                await _openLevelDialogCompletion.Task;
+                if (_openLevelDialogCompletion.Task.Result)
+                    LevelManager.ImportLevel(_openLevelDialogue.CurrentPath);
+                break;
+
+            case 6:
+                GetTree().Quit();
+                break;
+        }
     }
 }
